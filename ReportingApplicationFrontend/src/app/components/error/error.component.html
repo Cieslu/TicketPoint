@@ -1,0 +1,23 @@
+<div class="d-flex justify-content-center my-5">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        @if(error === -1){
+            Wystąpił nieoczekiwany błąd lub sesja użytkownika wygasła! Proszę zalogować się ponownie.
+        }@else if(error === -2){
+            Logowanie nie powiodło się, spróbuj ponownie!
+        }@else if(error === -3){
+            Wystąpił problem podczas dodawania użytkownika "{{name}}". <span class="fw-bold">Adres e-mail</span> oraz <span class="fw-bold">nazwa użytkownika</span> nie mogą się powtarzać, a hasło musi być poprawnie wprowadzone!
+        }@else if(error === -4){
+            Wystąpił problem podczas usuwania użytkownika "{{name}}".
+        }@else if(error === -5){
+            Wystąpił problem podczas aktualizacji użytkownika "{{name}}".
+        }@else if(error === -6){
+            Wystąpił problem podczas blokowania użytkownika "{{name}}". 
+        }@else if(error === -7){
+            Wystąpił problem podczas zmiany hasła użytkownika "{{name}}"!
+        }@else if(error === -8){
+            Wystąpił problem podczas tworzenia zgłoszenia "{{name}}"!
+        }
+        <button type="button" class="btn-close" aria-label="Close" (click)="hideAlert()"></button>
+    </div>
+</div>

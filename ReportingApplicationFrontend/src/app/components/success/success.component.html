@@ -1,0 +1,23 @@
+<div class="d-flex justify-content-center my-5">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill"></i>
+        @if(success === 2){
+            Pomyślnie wylogowano z aplikacji Korner Report!
+        }@else if(success === 3){
+            Pomyślnie dodano użytkownika "{{name}}".
+        }@else if(success === 4){
+            Pomyślnie usunięto użytkownika "{{name}}".
+        }@else if(success === 5){
+            Pomyślnie zaktualizowano użytkownika "{{name}}".
+        }@else if(success === 6){
+            Pomyślnie zablokowano użytkownika "{{name}}".
+        }@else if(success === 7){
+            Pomyślnie odblokowano użytkownika "{{name}}".
+        }@else if(success === 8){
+            Pomyślnie zmieniono hasło użytkownika "{{name}}".
+        }@else if(success === 9){
+            Pomyślnie utworzono zgłoszenie "{{name}}".
+        }
+        <button type="button" class="btn-close" aria-label="Close" (click)="hideAlert()"></button>
+    </div>
+</div>

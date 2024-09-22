@@ -1,0 +1,86 @@
+<div class="mb-3">
+    <app-search (searchUser)="searchUser($event)" (searchBranch)="searchBranch($event)" [branches]="branches" [updatedBranches]="updatedBranches"[placeholder]="placeholder"></app-search>
+</div>
+@if(isLoading){
+<app-spinner></app-spinner>
+}@else{
+<div>
+    @if(tickets.length === 0 && !isLoading){
+    <div class="d-flex justify-content-center">
+        <div class="alert alert-warning col-6" role="alert">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            Lista zgłoszeń jest pusta!
+        </div>
+    </div>
+    }@else {
+    <ol class="list-group">
+        @for(ticket of tickets; track ticket.id){
+        <li class="list-group-item item-action shadow p-" [ngClass]="{'fw-bold bg-body-tertiary': !ticket.isRead}">
+            <div class="row">
+                <div class="col-10 border-end border-black">
+                    <a class="text-decoration-none d-flex text-black p-2" routerLink="/administrator/ticket/{{ticket.id}}">
+                        <div class="d-flex col-3">
+                            <span class="text-truncate">
+                                <i class="bi bi-person"></i> {{ticket.user!.firstName}} {{ticket.user!.lastName}} ({{ticket.user!.signature}})
+                            </span>
+                        </div>
+                        <div class="me-auto d-flex offset-1 col-6">
+                            <span class="text-truncate">
+                                <i class="bi bi-file-text"></i> {{ticket.title}}
+                            </span>
+                            @for(recipent of ticket.recipents; track recipent.id){
+                                {{recipent.name}}
+                            }
+                        </div>
+                        <!-- <div class="me-auto d-flex offset-1 col-6">
+                            @for(recipent of ticket.recipents; track recipent.id){
+                                {{recipent.name}}
+                            }
+                        </div> -->
+                        <div class="col-2 d-flex justify-content-end ">
+                            <i class="bi bi-calendar"> {{ticket.created | date:"dd/MM/YYYY"}}</i> 
+                        </div>
+                    </a>
+                </div>
+                <div class="col d-flex justify-content-center three-dots">
+                    ...
+                </div>
+                <div class="col d-flex buttons-action">
+                    <div class="col-3 d-flex justify-content-center">
+                        <button type="button" class="btn btn-outline-success" (click)="isRead(ticket.id)">
+                            @if(!ticket.isRead){
+                            <i class="bi bi-envelope-open-fill"></i>
+                            }@else{
+                            <i class="bi bi-envelope-fill"></i>
+                            }
+                        </button>
+                    </div>
+                    <div class="col-3 d-flex justify-content-center">
+                        <button type="button" class="btn btn-outline-warning" (click)="takeTicket(ticket.id)">
+                            @if(!ticket.isRead){
+                            <i class="bi bi-bookmark-check-fill"></i>
+                            }@else{
+                            <i class="bi bi-bookmark-dash-fill"></i>
+                            }
+                        </button>
+                    </div>
+                    <div class="col-4 d-flex justify-content-center">
+                        <button class="dropdown-toggle btn btn-outline-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-pen-fill"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Otwarte</a></li>
+                            <li><a class="dropdown-item" href="#">Zamknięte</a></li>
+                        </ul>
+                    </div>
+                    <!-- <button type="button" class="btn btn-outline-success" (click)="isRead(ticket.id)">
+                        <i class="bi bi-arrow-down-circle-fill"></i>
+                    </button> -->
+                </div>
+            </div>
+        </li>
+        }
+    </ol>
+    }
+</div>
+}

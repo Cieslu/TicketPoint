@@ -1,0 +1,69 @@
+<div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" [ngClass]="{'modal-xl': operation === 1 || operation === 4 || operation === 5,  'modal-lg': operation === 6}">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    @if(operation === 1){
+                        Edycja użytkownika - <span class="text-decoration-underline">{{name}}</span>.
+                    }@else if(operation === 2){
+                        @if(!user?.locked){
+                            Czy napewno chcesz zablokować użytkownika - <span class="text-decoration-underline">{{user?.firstName}} {{user?.lastName}}</span>?
+                        }@else{
+                            Czy napewno chcesz odblokować użytkownika - <span class="text-decoration-underline">{{user?.firstName}} {{user?.lastName}}</span>?
+                        }
+                    }@else if(operation === 3){
+                        Czy napewno chcesz usunąć użytkownika - <span class="text-decoration-underline">{{user?.firstName}} {{user?.lastName}}</span>?
+                    }@else if(operation === 4){
+                        Dodawanie użytkownika.
+                    }@else if(operation === 5){
+                        Utwórz nowe zgłoszenie.
+                    }@else if(operation === 6){
+                        Zmień hasło użytkownika - <span class="text-decoration-underline">{{user?.firstName}} {{user?.lastName}}</span>.
+                    }
+                </h1>
+                <button #btnClose type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body border-bottom-0">
+                @if(isLoading){
+                    <app-spinner></app-spinner>
+                }
+                @if(operation === 1){
+                    <app-form [operation]="operation" [userToEdit]="user!" (formEvent)="editUser($event)"></app-form>
+                }@else if(operation === 2){
+                    @if(!user?.locked){
+                        Operacja ta sprawi, że użytkownik nie będzie mógł się zalogowć.
+                    }@else{
+                        Operacja ta sprawi, że użytkownik będzie mógł się zalogowć.
+                    }
+                }@else if(operation === 3){
+                    Operacja ta sprawi, że użytkownik zostanie całkowicie usunięty z bazy użytkowników.
+                    @if(!canDeleteUser){
+                        <p class="text-danger"><i class="bi bi-exclamation-triangle-fill"></i> Nie można usunąć użytkownika, który ma zgłoszenia!</p>
+                    }
+                }@else if(operation === 4){
+                    <app-form [operation]="operation" (formEvent)="addUser($event)"></app-form>
+                }@else if(operation === 5){
+                    <app-ticket-form (formEvent)="addTicket($event)"></app-ticket-form>
+                }@else if(operation === 6){
+                    <app-change-password-form [userId]="user!.id" (formEvent)="editPassword($event)"></app-change-password-form>
+                }
+            </div>
+            <div class="modal-footer">
+                @if(operation === 2){
+                    <button type="button" class="btn btn-primary" (click)="lockOrUnlockUser(user!)">Zatwierdź</button>
+                }@else if(operation === 3){
+                    <button type="button" class="btn btn-primary" (click)="deleteUser(user!)" [disabled]="!canDeleteUser">Zatwierdź</button>
+                }
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Okna modalne, które się wyświetlą dla danego numeru:
+1 - Edycja użytkownika
+2 - Blokowanie użytkownika
+3 - Usunięcie użytkownika
+4 - Dodawanie użytkownika 
+5 - Dodawanie zgłoszenia
+6 - Edycja hasła użytkownika -->

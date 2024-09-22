@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-6">
+        <select class="form-select" aria-label="Branch select" [(ngModel)]="searchText2" (change)="searchB()">
+            <option [disabled]="true">{{initialValue}}</option>
+            @if(searchText2 !== initialValue){
+                <option class="text-danger">Brak</option>
+            }
+            @for(branch of branches; track $index){
+                <option>{{branch}}</option>
+            }
+        </select>
+    </div>
+    <div class="col-6">
+        <input class="form-control me-2" type="search" [placeholder]="placeholder" aria-label="Search" [(ngModel)]="searchText" (input)="search()">
+    </div>
+</div>

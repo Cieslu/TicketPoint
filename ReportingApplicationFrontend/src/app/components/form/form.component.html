@@ -1,0 +1,108 @@
+<div class="row justify-content-center">
+    <form class="col-6" #userForm="ngForm" (ngSubmit)="execForm(userForm)">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control"
+                [ngClass]="{'is-valid': !firstName.errors?.['required'], 'is-invalid': firstName.errors?.['required'] && firstName.touched}"
+                id="floatingFirstName" placeholder="FirstName" name="firstName" [(ngModel)]="formUser.firstName"
+                #firstName="ngModel" required>
+            <label for="floatingFirstName">Imię</label>
+            @if(firstName.errors?.['required'] && firstName.touched){
+            <div class="invalid-feedback">
+                Imię jest wymagane!
+            </div>
+            }
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control"
+                [ngClass]="{'is-valid': !lastName.errors?.['required'], 'is-invalid': lastName.errors?.['required'] && lastName.touched}"
+                id="floatingLastName" placeholder="LastName" name="lastName" [(ngModel)]="formUser.lastName"
+                #lastName="ngModel" required>
+            <label for="floatingInput">Nazwisko</label>
+            @if(lastName.errors?.['required'] && lastName.touched){
+            <div class="invalid-feedback">
+                Nazwisko jest wymagane!
+            </div>
+            }
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control"
+                [ngClass]="{'is-valid': !userName.errors?.['required'], 'is-invalid': userName.errors?.['required'] && userName.touched}"
+                id="floatingUserName" placeholder="UserName" name="userName" [(ngModel)]="formUser.userName"
+                #userName="ngModel" ngModel required>
+            <label for="floatingUserName">Nazwa użytkownika</label>
+            <small>Nazwa użytkownika może zawierać tylko litery oraz cyfry.</small>
+            @if(userName.errors?.['required'] && userName.touched){
+            <div class="invalid-feedback">
+                Nazwa użytkownika jest wymagana!
+            </div>
+            }
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control"
+                [ngClass]="{'is-valid': !email.errors?.['required'] && !email.errors?.['pattern'], 'is-invalid': email.errors?.['required'] && email.touched || email.errors?.['pattern']}"
+                id="floatingEmail" placeholder="Email" name="email" #email="ngModel" [(ngModel)]="formUser.email"
+                required pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$">
+            <label for="floatingEmail">Email</label>
+            @if(email.errors?.['required'] && email.touched){
+            <div class="invalid-feedback">
+                Email jest wymagany!
+            </div>
+            }@else if (email.errors?.['pattern']) {
+            <div class="invalid-feedback">
+                Wprowadzony email jest niepoprawny!
+            </div>
+            }
+        </div>
+        <div class="form-floating mb-3" [ngClass]="{'d-none': operation === 1}">
+            <input type="password" class="form-control"
+                [ngClass]="{'is-valid': !password.errors?.['required'] && !password.errors?.['minlength'], 'is-invalid': password.errors?.['required'] && password.touched || password.errors?.['minlength'] || password.errors?.['pattern']}"
+                id="floatingPassword" placeholder="Password" name="password" [(ngModel)]="formUser.password"
+                #password="ngModel" required minlength="8" maxlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8}$">
+            <label for="floatingPassword">Hasło</label>
+            @if(password.errors?.['required'] && password.touched){
+            <div class="invalid-feedback">
+                Hasło jest wymagane!
+            </div>
+            }@else if(password.errors?.['minlength'] || password.errors?.['pattern']){
+            <div class="invalid-feedback">
+                Hasło musi mieć 8 znaków oraz zawierać cyfrę, małą i dużą literę oraz znak specjalny!
+            </div>
+            }
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control"
+                [ngClass]="{'is-valid': !branch.errors?.['required'], 'is-invalid': branch.errors?.['required'] && branch.touched}"
+                id="floatingBranch" placeholder="Branch" name="branch" #branch="ngModel" [(ngModel)]="formUser.branch"
+                required>
+            <label for="floatingBranch">Odział</label>
+            @if(branch.errors?.['required'] && branch.touched){
+            <div class="invalid-feedback">
+                Oddział jest wymagany!
+            </div>
+            }
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control"
+                [ngClass]="{'is-valid': !signature.errors?.['required'], 'is-invalid': signature.errors?.['required'] && signature.touched}"
+                id="floatingSignature" placeholder="Signature" name="signature" [(ngModel)]="formUser.signature"
+                #signature="ngModel" required>
+            <label for="floatingSignature">Sygnatura oddziału</label>
+            @if(signature.errors?.['required'] && signature.touched){
+            <div class="invalid-feedback">
+                Sygnatura oddziału jest wymagana!
+            </div>
+            }
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="checkboxIsAdministrator" name="isAdministrator"
+                [(ngModel)]="formUser.isAdministrator" #isAdministrator="ngModel">
+            <label class="form-check-label" for="checkboxIsAdministrator">Czy konto Administratora?</label>
+        </div>
+        <div class="text-center mt-3">
+            <button type="submit" class="btn btn-primary"
+                [disabled]="firstName.invalid || lastName.invalid || userName.invalid || email.invalid || (operation === 1 ? null : password.invalid) || branch.invalid || signature.invalid">
+                Zatwierdź
+            </button>
+        </div>
+    </form>
+</div>

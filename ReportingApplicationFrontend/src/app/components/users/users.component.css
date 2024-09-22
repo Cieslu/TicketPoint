@@ -1,0 +1,13 @@
+.item-action:hover{
+    border-right: 2px solid #dee2e6!important;
+    border-left: 2px solid #dee2e6!important;
+    border-bottom: 3px solid #dee2e6!important;
+}
+
+.buttons-action{
+    display: none;
+}
+
+.item-action:hover > .buttons-action{
+    display: block;
+}

@@ -1,0 +1,67 @@
+@if(isLoading){
+<app-spinner></app-spinner>
+}@else{
+<div class="row">
+    <div class="col-6 border border-2 rounded p-4 shadow">
+        <div>
+            <h2 class="text-center">Informacje o użytkowniku</h2>
+            <div class="border-bottom">
+                <p><span class="fw-bold">Imię:</span> {{ticket.user!.firstName}}</p>
+                <p><span class="fw-bold">Nazwisko:</span> {{ticket.user!.lastName}}</p>
+                <p><span class="fw-bold">Nazwa użytkownika:</span> {{ticket.user!.userName}}</p>
+                <p><span class="fw-bold">Email:</span> {{ticket.user!.email}}</p>
+                <p><span class="fw-bold">Oddział:</span> {{ticket.user!.branch}}</p>
+                <p><span class="fw-bold">Sygnatura oddziału:</span> {{ticket.user!.signature}}</p>
+            </div>
+            <div>
+                <h2 class="text-center mt-3">Informacje o zgłoszeniu</h2>
+                <div>
+                    <p><span class="fw-bold">Id zgłoszenia:</span> {{ticket.id}}</p>
+                    <p><span class="fw-bold">Data utworzenia:</span> {{ticket.created | date:"dd/MM/YYYY HH:mm"}}</p>
+                    <p><span class="fw-bold">Tytuł:</span> {{ticket.title}}</p>
+                    <p><span class="fw-bold">Opis:</span> {{ticket.description}}</p>
+                </div>
+                <div class="row">
+                    <h3>Załączniki:</h3>
+                    @if(ticket.attachments?.length === 0 && !isLoading){
+                    <div class="d-flex justify-content-center">
+                        <div class="alert alert-warning col-6" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill"></i>
+                            Brak załączników!
+                        </div>
+                    </div>
+                    }@else{
+                    @for(attachment of ticket.attachments; track attachment.id){
+                    <div class="col-4 d-flex justify-content-center">
+                        <button class="btn" (click)="downloadAttachment(attachment)">
+                            @if(attachment.fileName.includes(".pdf")){
+                            <i class="bi bi-filetype-pdf fs-2"></i>
+                            }@else if(attachment.fileName.includes(".doc")){
+                            <i class="bi bi-filetype-docx fs-2"></i>
+                            }@else if(attachment.fileName.includes(".docx")){
+                            <i class="bi bi-filetype-docx fs-2"></i>
+                            }@else if(attachment.fileName.includes(".png")){
+                            <i class="bi bi-filetype-png fs-2"></i>
+                            }@else if(attachment.fileName.includes(".jpg")){
+                            <i class="bi bi-filetype-jpg fs-2"></i>
+                            }@else if(attachment.fileName.includes(".jpeg")){
+                            <i class="bi bi-filetype-jpg fs-2"></i>
+                            }@else if(attachment.fileName.includes(".txt")){
+                            <i class="bi bi-filetype-txt fs-2"></i>
+                            }
+                            <div class="fw-bold">
+                                {{attachment.fileName}}
+                            </div>
+                        </button>
+                    </div>
+                    }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+
+    </div>
+</div>
+}
