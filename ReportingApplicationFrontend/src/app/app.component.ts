@@ -17,7 +17,7 @@ import { take } from 'rxjs';
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit{
-  title = 'Ticket App';
+  title = 'TicketPoint';
   userName: string = "";
   role: boolean = false;
   is_logged: boolean = false;

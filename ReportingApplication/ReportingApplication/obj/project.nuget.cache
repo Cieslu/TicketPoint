@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MTuLqe9a91R5ow11pTqclwqNIYpw+v2JoybIFZcHcVdRMleiuzzBM8W9Ce1NZFMAtvLvK4UGx/j8rGis3I2LsQ==",
+  "dgSpecHash": "6pxU3s+5E2qicTWCXSJh5o5B7vhqLjrdX/K1/f+wLOzqV3pBTXIYm6eV6L2+xHcXFvBhtRD9jy2d5emaobP6ow==",
   "success": true,
-  "projectFilePath": "C:\\Users\\szymo\\OneDrive\\Pulpit\\RepApps_aktualna\\ReportingApplication\\ReportingApplication\\ReportingApplication.csproj",
+  "projectFilePath": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\ReportingApplication.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\szymo\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\szymo\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",

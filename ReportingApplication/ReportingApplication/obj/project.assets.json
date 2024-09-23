@@ -4454,11 +4454,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\szymo\\OneDrive\\Pulpit\\RepApps_aktualna\\ReportingApplication\\ReportingApplication\\ReportingApplication.csproj",
+      "projectUniqueName": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\ReportingApplication.csproj",
       "projectName": "ReportingApplication",
-      "projectPath": "C:\\Users\\szymo\\OneDrive\\Pulpit\\RepApps_aktualna\\ReportingApplication\\ReportingApplication\\ReportingApplication.csproj",
+      "projectPath": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\ReportingApplication.csproj",
       "packagesPath": "C:\\Users\\szymo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\szymo\\OneDrive\\Pulpit\\RepApps_aktualna\\ReportingApplication\\ReportingApplication\\obj\\",
+      "outputPath": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\szymo\\AppData\\Roaming\\NuGet\\NuGet.Config",
