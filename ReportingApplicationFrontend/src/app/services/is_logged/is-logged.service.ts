@@ -60,6 +60,10 @@ export class IsLoggedService {
     return this.decodeToken.getDecodedAccessToken(localStorage.getItem("accessToken")).name;
   }
 
+  takeUserNameFromToken(): string{
+    return this.decodeToken.getDecodedAccessToken(localStorage.getItem("accessToken")).userName;
+  }
+
   takeIdFromToken(): string{
     return this.decodeToken.getDecodedAccessToken(localStorage.getItem("accessToken")).id;
   }

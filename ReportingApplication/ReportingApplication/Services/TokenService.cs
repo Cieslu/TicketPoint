@@ -62,6 +62,7 @@ namespace MediBookerAPI.Services
                 var claims = new List<Claim>();
                 claims.Add(new Claim("name", user.FirstName));
                 claims.Add(new Claim("id", userId.ToString()));
+                claims.Add(new Claim("userName", $"{user.LastName}{user.FirstName.Remove(1)}"));
 
                 ICollection<string> roles = await _userManager.GetRolesAsync(user);
                 claims.Add(new Claim("role", roles.First()));

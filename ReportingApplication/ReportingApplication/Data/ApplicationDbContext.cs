@@ -42,6 +42,12 @@ namespace ReportingApplication.Data
             builder.Ignore<IdentityUserClaim<string>>();
             builder.Ignore<IdentityUserLogin<string>>();
             builder.Ignore<IdentityUserToken<string>>();
+
+/*            builder.Entity<Ticket>()
+                .HasOne(t => t.Recipent)
+                .WithMany(r => r.Tickets)
+                .HasForeignKey(t => t.RecipentId)
+                .OnDelete(DeleteBehavior.ClientSetNull);*/
         }
     }
 }

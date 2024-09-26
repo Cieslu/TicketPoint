@@ -1,10 +1,10 @@
 ﻿namespace ReportingApplication.Models
 {
-    public class Recipent(Guid ticketId, string userId)
+    public class Recipent(string userId, string recipentName)
     {
-        public int Id { get; set; }
-        public Guid TicketId { get; set; } = ticketId;
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string UserId { get; set; } = userId;
-        public Ticket ticket { get; set; } = null!;
+        public string RecipentName { get; set; } = recipentName;
+        public List<Ticket> Tickets { get; set; } = new List<Ticket>();
     }
 }

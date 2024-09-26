@@ -2,6 +2,7 @@ import { Attachment } from "../models/attachment";
 import { Recipent } from "../models/recipent";
 import { User } from "../models/user";
 import { AttachmentDTO } from "./attachmentDTO";
+import { RecipentDTO } from "./recipentDTO";
 import { UserDTO } from "./userDTO";
 
 export class TicketDTO {
@@ -15,9 +16,9 @@ export class TicketDTO {
     files?: FileList;
     user?: UserDTO;
     attachments?: AttachmentDTO[];
-    recipents?: Recipent[];
+    recipent?: RecipentDTO;
 
-    constructor(_id: string, _userId: string, _created: string, _title: string, _description: string, _isRead: boolean, _status: string, _files?: FileList, _user?: User, _attachments?: Attachment[], _recipents?: Recipent[]) {
+    constructor(_id: string, _userId: string, _created: string, _title: string, _description: string, _isRead: boolean, _status: string, _files?: FileList, _user?: User, _attachments?: Attachment[], _recipent?: Recipent) {
         this.id = _id;
         this.userId = _userId;
         this.created = _created ?? null;
@@ -28,6 +29,6 @@ export class TicketDTO {
         this.files = _files;
         this.user = _user;
         this.attachments = _attachments;
-        this.recipents = _recipents;
+        this.recipent = _recipent;
     }
 }

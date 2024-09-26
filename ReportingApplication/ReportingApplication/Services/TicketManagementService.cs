@@ -86,7 +86,7 @@ namespace ReportingApplication.Services
 
                 TicketDTO addedTicketDTO = _mapper.Map<TicketDTO>(addedTicket);
                 UserDTO userDTO = _mapper.Map<UserDTO>(user);
-                addedTicketDTO.user = userDTO;
+                addedTicketDTO.User = userDTO;
                 addedTicket.Attachments.ForEach(attachment =>
                 {
                     addedTicketDTO.Attachments.Add(_mapper.Map<AttachmentDTO>(attachment));
@@ -111,18 +111,16 @@ namespace ReportingApplication.Services
                 tickets.ForEach(ticket =>
                 {
                     User? user = _context.Users.Find(ticket.UserId);
+                    Recipent? recipent = _context.Recipents.Find(ticket.RecipentId);
 
                     if (user is not null)
                     {
-                        ticketsDTO.Find(x => x.Id == ticket.Id.ToString())!.user = _mapper.Map<UserDTO>(user);
-                        /*TicketDTO ticketDTO = ticketsDTO.Find(x => x.Id == ticket.Id.ToString())!;
+                        ticketsDTO.Find(x => x.Id == ticket.Id.ToString())!.User = _mapper.Map<UserDTO>(user);
+                    }
 
-                        ticketDTO.user = _mapper.Map<UserDTO>(user);*/
-/*
-                        if(ticket.Recipents.Count() != 0)
-                        {
-                            ticketDTO.Recipents.Add(new RecipentDTO($"{user.FirstName} {user.LastName}"));
-                        }*/
+                    if(recipent is not null)
+                    {
+                        ticketsDTO.Find(x => x.Id == ticket.Id.ToString())!.Recipent = _mapper.Map<RecipentDTO>(recipent);
                     }
                 });
 
@@ -161,7 +159,7 @@ namespace ReportingApplication.Services
 
                 if (user is not null)
                 {
-                    ticketDTO.user = _mapper.Map<UserDTO>(user);
+                    ticketDTO.User = _mapper.Map<UserDTO>(user);
                 }
 
                 return ticketDTO;
@@ -232,7 +230,7 @@ namespace ReportingApplication.Services
             }
         }
 
-       /* public async Task<bool> takeTicket(Guid ticketId, string userId)
+        public async Task<bool> takeTicket(Guid ticketId, string userId)
         {
             try
             {
@@ -245,12 +243,26 @@ namespace ReportingApplication.Services
 
                 User? user = await _context.Users.FindAsync(userId);
 
-                if (ticket is null)
+                if (user is null)
                 {
                     return false;
                 }
 
-                Recipent recipent = new Recipent(ticketId, userId);
+                if (ticket.RecipentId is not null)
+                {
+                    await _context.Tickets
+                        .Where(x => x.RecipentId == ticket.RecipentId)
+                        .ExecuteUpdateAsync(y => y.SetProperty(x => x.RecipentId, (Guid?)null));
+
+                    await _context.Recipents
+                        .Where(x => x.Id == ticket.RecipentId)
+                        .ExecuteDeleteAsync();
+
+                    return true;
+                }
+
+                Recipent recipent = new Recipent(userId, $"{user!.LastName}{user!.FirstName.Remove(1)}");
+                ticket.RecipentId = recipent.Id;
 
                 await _context.Recipents.AddAsync(recipent);
                 await _context.SaveChangesAsync();
@@ -261,6 +273,6 @@ namespace ReportingApplication.Services
             {
                 throw new Exception($"Error from isRead in TicketService, message: {e}");
             }
-        }*/
+        }
     }
 }

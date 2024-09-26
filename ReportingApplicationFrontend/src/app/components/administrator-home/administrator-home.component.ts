@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
 import { CommonModule, NgClass } from '@angular/common';
 import { LogoutService } from '../../services/logout/logout.service';
 import { IsLoggedService } from '../../services/is_logged/is-logged.service';
+import { Recipent } from '../../models/recipent';
 
 @Component({
   selector: 'app-administrator-home',
@@ -55,7 +56,7 @@ export class AdministratorHomeComponent implements OnInit, OnDestroy {
           this.tickets.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
         });
         this.searchedTickets = JSON.parse(JSON.stringify(this.tickets));
-        this.tickets.forEach(x => this.branches.add(x.user!.signature));//W tym przypadku sa robione kopie wartości
+        this.tickets.forEach(x => {this.branches.add(x.user!.signature), console.log(x.recipent)});//W tym przypadku sa robione kopie wartości
       },
       error: err => {
         this.spinnerService.setLoading(false);
@@ -80,14 +81,34 @@ export class AdministratorHomeComponent implements OnInit, OnDestroy {
           checkedSearchedTicket.isRead = checkedSearchedTicket.isRead ? false : true;
         }
       },
-      error: (err) => { 
+      error: () => {
         this.logoutService.logoutErr401();
       }
     });
   }
-
-  takeTicket(ticketId: string): void{
-    this.ticketManagementService.takeTicket(ticketId, this.isLoggedService.takeIdFromToken()).subscribe();
+  
+  takeTicket(ticketId: string): void {
+    this.ticketManagementService.takeTicket(ticketId, this.isLoggedService.takeIdFromToken()).subscribe({
+      next: () => {
+        const ticket = this.tickets.find(x => x.id === ticketId);
+        const searchedTicket = this.searchedTickets.find(x => x.id === ticketId);
+        if (ticket !== undefined && searchedTicket !== undefined) {
+          console.log(ticket.recipent)
+          if(ticket.recipent?.recipentName !== null && ticket.recipent?.recipentName !== undefined){
+            console.log("rozny")
+            ticket.recipent!.id = null; 
+            ticket.recipent!.userId = null; 
+            ticket.recipent!.recipentName = null; 
+          }else{
+            console.log("nie rozny " + this.isLoggedService.takeUserNameFromToken())
+            ticket.recipent!.recipentName = this.isLoggedService.takeUserNameFromToken();
+          }
+        }
+      },
+      error: () => {
+        this.logoutService.logoutErr401();
+      }
+    });
   }
 
   searchUser(searchText: string): void {

@@ -77,8 +77,7 @@ export class TicketManagementService {
       ticket.files, 
       (ticket.user ? this.userManagementService.toUserDTO(ticket.user!) : undefined), 
       ticket.attachments?.map(x => this.toAttachmentDTO(x)),
-      ticket.recipents?.map(x => this.toRecipentDTO(x))
-      //ticket.recipents?.map(x => this.toRecipentDTO(x))
+      this.toRecipentDTO(ticket.recipent)
     );
   }
 
@@ -92,9 +91,9 @@ export class TicketManagementService {
       ticketDTO.isRead, 
       ticketDTO.status, 
       this.userManagementService.toUser(ticketDTO.user!), 
-      ticketDTO.files, 
       ticketDTO.attachments?.map(x => this.toAttachment(x)),
-      ticketDTO.recipents?.map(x => this.toRecipent(x))
+      ticketDTO.files, 
+      this.toRecipent(ticketDTO.recipent)
     );
   }
 
@@ -106,11 +105,11 @@ export class TicketManagementService {
     return new Attachment(attachmentDTO.id, attachmentDTO.fileName, attachmentDTO.filePath, attachmentDTO.ticketId);
   }
 
-  toRecipentDTO(recipent: Recipent): RecipentDTO{
-    return new RecipentDTO(recipent.id, recipent.name);
+  toRecipentDTO(recipent?: Recipent | null): RecipentDTO{
+    return new RecipentDTO(recipent?.id, recipent?.userId, recipent?.recipentName);
   }
 
-  toRecipent(recipentDTO: RecipentDTO): Recipent{
-    return new Recipent(recipentDTO.id, recipentDTO.name);
+  toRecipent(recipentDTO?: RecipentDTO): Recipent{
+    return new Recipent(recipentDTO?.id, recipentDTO?.userId, recipentDTO?.recipentName);
   }
 }

@@ -1,9 +1,11 @@
 export class RecipentDTO{
-    id: number;
-    name: string;
+    id?: number | null;
+    userId?: string | null;
+    recipentName?: string | null;
 
-    constructor(_id: number, _name: string){
+    constructor(_id?: number | null, _userId?: string | null, _recipentName?: string | null){
         this.id = _id;
-        this.name = _name;
+        this.userId = _userId;
+        this.recipentName = _recipentName;
     }
 }

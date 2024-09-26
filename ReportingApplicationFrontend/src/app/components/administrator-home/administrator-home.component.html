@@ -15,7 +15,7 @@
     }@else {
     <ol class="list-group">
         @for(ticket of tickets; track ticket.id){
-        <li class="list-group-item item-action shadow p-" [ngClass]="{'fw-bold bg-body-tertiary': !ticket.isRead}">
+        <li class="list-group-item item-action shadow" [ngClass]="{'fw-bold bg-body-tertiary': !ticket.isRead}">
             <div class="row">
                 <div class="col-10 border-end border-black">
                     <a class="text-decoration-none d-flex text-black p-2" routerLink="/administrator/ticket/{{ticket.id}}">
@@ -28,16 +28,9 @@
                             <span class="text-truncate">
                                 <i class="bi bi-file-text"></i> {{ticket.title}}
                             </span>
-                            @for(recipent of ticket.recipents; track recipent.id){
-                                {{recipent.name}}
-                            }
                         </div>
-                        <!-- <div class="me-auto d-flex offset-1 col-6">
-                            @for(recipent of ticket.recipents; track recipent.id){
-                                {{recipent.name}}
-                            }
-                        </div> -->
                         <div class="col-2 d-flex justify-content-end ">
+                            <span class="badge bg-danger rounded-pill me-1">{{ticket.recipent?.recipentName}}</span>
                             <i class="bi bi-calendar"> {{ticket.created | date:"dd/MM/YYYY"}}</i> 
                         </div>
                     </a>
@@ -57,7 +50,7 @@
                     </div>
                     <div class="col-3 d-flex justify-content-center">
                         <button type="button" class="btn btn-outline-warning" (click)="takeTicket(ticket.id)">
-                            @if(!ticket.isRead){
+                            @if(!ticket.recipent?.recipentName){
                             <i class="bi bi-bookmark-check-fill"></i>
                             }@else{
                             <i class="bi bi-bookmark-dash-fill"></i>

@@ -12,7 +12,7 @@ namespace ReportingApplication.Interfaces.Services
         public Task<bool> doesUserHaveAnyTickets(string userId);
         public Task<(byte[], string)?> downloadAttachment(Guid ticketId, int attachmentId);
         public Task<bool> isRead(Guid ticketId);
-        //public Task<bool> takeTicket(Guid ticketId, string userId);
+        public Task<bool> takeTicket(Guid ticketId, string userId);
 
     }
 }

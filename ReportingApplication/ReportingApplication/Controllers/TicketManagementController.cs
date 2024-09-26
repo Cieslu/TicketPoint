@@ -40,7 +40,7 @@ namespace ReportingApplication.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<List<TicketDTO>>> showTickets()
         {
-            List<TicketDTO> ticketsDTO = await _ticketService.showTickets();
+            IEnumerable<TicketDTO> ticketsDTO = await _ticketService.showTickets();
 
             return Ok(ticketsDTO);
         }
@@ -96,7 +96,7 @@ namespace ReportingApplication.Controllers
             return Ok();
         }
 
-        /*[HttpPut("takeTicket/{ticketId}/{userId}")]
+        [HttpPut("takeTicket/{ticketId}/{userId}")]
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<bool>> takeTicket(string userId, Guid ticketId)
         {
@@ -108,6 +108,6 @@ namespace ReportingApplication.Controllers
             }
 
             return Ok();
-        }*/
+        }
     }
 }

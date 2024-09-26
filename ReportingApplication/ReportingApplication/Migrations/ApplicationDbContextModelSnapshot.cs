@@ -88,22 +88,19 @@ namespace ReportingApplication.Migrations
 
             modelBuilder.Entity("ReportingApplication.Models.Recipent", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<Guid>("TicketId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("RecipentName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TicketId");
 
                     b.ToTable("Recipents");
                 });
@@ -124,6 +121,9 @@ namespace ReportingApplication.Migrations
                     b.Property<bool>("IsRead")
                         .HasColumnType("bit");
 
+                    b.Property<Guid?>("RecipentId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -137,6 +137,8 @@ namespace ReportingApplication.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RecipentId");
 
                     b.ToTable("Tickets");
                 });
@@ -227,22 +229,23 @@ namespace ReportingApplication.Migrations
                     b.Navigation("ticket");
                 });
 
+            modelBuilder.Entity("ReportingApplication.Models.Ticket", b =>
+                {
+                    b.HasOne("ReportingApplication.Models.Recipent", "Recipent")
+                        .WithMany("Tickets")
+                        .HasForeignKey("RecipentId");
+
+                    b.Navigation("Recipent");
+                });
+
             modelBuilder.Entity("ReportingApplication.Models.Recipent", b =>
                 {
-                    b.HasOne("ReportingApplication.Models.Ticket", "ticket")
-                        .WithMany("Recipents")
-                        .HasForeignKey("TicketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ticket");
+                    b.Navigation("Tickets");
                 });
 
             modelBuilder.Entity("ReportingApplication.Models.Ticket", b =>
                 {
                     b.Navigation("Attachments");
-
-                    b.Navigation("Recipents");
                 });
 #pragma warning restore 612, 618
         }

@@ -7,28 +7,56 @@
       "RelativeMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|solutionrelative:reportingapplication\\services\\ticketmanagementservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|c:\\users\\szymo\\onedrive\\pulpit\\ticketpoint\\reportingapplication\\reportingapplication\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|solutionrelative:reportingapplication\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|c:\\users\\szymo\\onedrive\\pulpit\\ticketpoint\\reportingapplication\\reportingapplication\\models\\ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|solutionrelative:reportingapplication\\models\\ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|c:\\users\\szymo\\onedrive\\pulpit\\ticketpoint\\reportingapplication\\reportingapplication\\models\\attachment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|solutionrelative:reportingapplication\\models\\attachment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|c:\\users\\szymo\\onedrive\\pulpit\\ticketpoint\\reportingapplication\\reportingapplication\\controllers\\ticketmanagementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|solutionrelative:reportingapplication\\controllers\\ticketmanagementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|c:\\users\\szymo\\onedrive\\pulpit\\ticketpoint\\reportingapplication\\reportingapplication\\models\\recipent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|solutionrelative:reportingapplication\\models\\recipent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|c:\\users\\szymo\\onedrive\\pulpit\\ticketpoint\\reportingapplication\\reportingapplication\\models\\ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|solutionrelative:reportingapplication\\models\\ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|c:\\users\\szymo\\onedrive\\pulpit\\ticketpoint\\reportingapplication\\reportingapplication\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|solutionrelative:reportingapplication\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|c:\\users\\szymo\\onedrive\\pulpit\\ticketpoint\\reportingapplication\\reportingapplication\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|solutionrelative:reportingapplication\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|c:\\users\\szymo\\onedrive\\pulpit\\ticketpoint\\reportingapplication\\reportingapplication\\automapper\\automapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|solutionrelative:reportingapplication\\automapper\\automapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|c:\\users\\szymo\\onedrive\\pulpit\\ticketpoint\\reportingapplication\\reportingapplication\\modelsdto\\ticket\\attachmentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|solutionrelative:reportingapplication\\modelsdto\\ticket\\attachmentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|c:\\users\\szymo\\onedrive\\pulpit\\ticketpoint\\reportingapplication\\reportingapplication\\models\\attachment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|solutionrelative:reportingapplication\\models\\attachment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|c:\\users\\szymo\\onedrive\\pulpit\\ticketpoint\\reportingapplication\\reportingapplication\\modelsdto\\ticket\\recipentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|solutionrelative:reportingapplication\\modelsdto\\ticket\\recipentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|c:\\users\\szymo\\onedrive\\pulpit\\ticketpoint\\reportingapplication\\reportingapplication\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|solutionrelative:reportingapplication\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|c:\\users\\szymo\\onedrive\\pulpit\\ticketpoint\\reportingapplication\\reportingapplication\\modelsdto\\ticket\\ticketdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|solutionrelative:reportingapplication\\modelsdto\\ticket\\ticketdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|c:\\users\\szymo\\onedrive\\pulpit\\ticketpoint\\reportingapplication\\reportingapplication\\interfaces\\services\\iticketmanagementservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|solutionrelative:reportingapplication\\interfaces\\services\\iticketmanagementservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|c:\\users\\szymo\\onedrive\\pulpit\\ticketpoint\\reportingapplication\\reportingapplication\\interfaces\\controllers\\iticketmanagementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83E0E19B-B2A8-4BF6-BE6D-21ADC8A56A25}|ReportingApplication\\ReportingApplication.csproj|solutionrelative:reportingapplication\\interfaces\\controllers\\iticketmanagementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,12 +66,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 13,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
@@ -54,15 +78,53 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TokenService.cs",
+              "DocumentMoniker": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\Services\\TokenService.cs",
+              "RelativeDocumentMoniker": "ReportingApplication\\Services\\TokenService.cs",
+              "ToolTip": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\Services\\TokenService.cs",
+              "RelativeToolTip": "ReportingApplication\\Services\\TokenService.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-26T18:46:47.631Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AttachmentDTO.cs",
+              "DocumentMoniker": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\ModelsDTO\\Ticket\\AttachmentDTO.cs",
+              "RelativeDocumentMoniker": "ReportingApplication\\ModelsDTO\\Ticket\\AttachmentDTO.cs",
+              "ToolTip": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\ModelsDTO\\Ticket\\AttachmentDTO.cs",
+              "RelativeToolTip": "ReportingApplication\\ModelsDTO\\Ticket\\AttachmentDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-24T20:02:10.719Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Attachment.cs",
+              "DocumentMoniker": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\Models\\Attachment.cs",
+              "RelativeDocumentMoniker": "ReportingApplication\\Models\\Attachment.cs",
+              "ToolTip": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\Models\\Attachment.cs",
+              "RelativeToolTip": "ReportingApplication\\Models\\Attachment.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-24T19:36:54.103Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\appsettings.json",
-              "RelativeDocumentMoniker": "ReportingApplication\\appsettings.json",
-              "ToolTip": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\appsettings.json",
-              "RelativeToolTip": "ReportingApplication\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-09-22T13:06:26.867Z"
+              "Title": "Ticket.cs",
+              "DocumentMoniker": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\Models\\Ticket.cs",
+              "RelativeDocumentMoniker": "ReportingApplication\\Models\\Ticket.cs",
+              "ToolTip": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\Models\\Ticket.cs",
+              "RelativeToolTip": "ReportingApplication\\Models\\Ticket.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-24T18:15:27.629Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -72,57 +134,83 @@
               "RelativeDocumentMoniker": "ReportingApplication\\Models\\Recipent.cs",
               "ToolTip": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\Models\\Recipent.cs",
               "RelativeToolTip": "ReportingApplication\\Models\\Recipent.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-03T12:49:04.632Z"
+              "WhenOpened": "2024-09-24T17:55:23.08Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "RecipentDTO.cs",
               "DocumentMoniker": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\ModelsDTO\\Ticket\\RecipentDTO.cs",
               "RelativeDocumentMoniker": "ReportingApplication\\ModelsDTO\\Ticket\\RecipentDTO.cs",
               "ToolTip": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\ModelsDTO\\Ticket\\RecipentDTO.cs",
               "RelativeToolTip": "ReportingApplication\\ModelsDTO\\Ticket\\RecipentDTO.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-03T12:49:08.299Z"
+              "WhenOpened": "2024-09-24T18:06:38.983Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Ticket.cs",
-              "DocumentMoniker": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\Models\\Ticket.cs",
-              "RelativeDocumentMoniker": "ReportingApplication\\Models\\Ticket.cs",
-              "ToolTip": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\Models\\Ticket.cs",
-              "RelativeToolTip": "ReportingApplication\\Models\\Ticket.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 10,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\Models\\User.cs",
+              "RelativeDocumentMoniker": "ReportingApplication\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\Models\\User.cs",
+              "RelativeToolTip": "ReportingApplication\\Models\\User.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-03T12:49:01.498Z"
+              "WhenOpened": "2024-09-24T19:11:00.722Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 11,
               "Title": "TicketDTO.cs",
               "DocumentMoniker": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\ModelsDTO\\Ticket\\TicketDTO.cs",
               "RelativeDocumentMoniker": "ReportingApplication\\ModelsDTO\\Ticket\\TicketDTO.cs",
               "ToolTip": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\ModelsDTO\\Ticket\\TicketDTO.cs",
               "RelativeToolTip": "ReportingApplication\\ModelsDTO\\Ticket\\TicketDTO.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-03T12:48:59.255Z"
+              "WhenOpened": "2024-09-24T18:08:51.803Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ITicketManagementService.cs",
+              "DocumentMoniker": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\Interfaces\\Services\\ITicketManagementService.cs",
+              "RelativeDocumentMoniker": "ReportingApplication\\Interfaces\\Services\\ITicketManagementService.cs",
+              "ToolTip": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\Interfaces\\Services\\ITicketManagementService.cs",
+              "RelativeToolTip": "ReportingApplication\\Interfaces\\Services\\ITicketManagementService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-24T17:56:19.49Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ITicketManagementController.cs",
+              "DocumentMoniker": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\Interfaces\\Controllers\\ITicketManagementController.cs",
+              "RelativeDocumentMoniker": "ReportingApplication\\Interfaces\\Controllers\\ITicketManagementController.cs",
+              "ToolTip": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\Interfaces\\Controllers\\ITicketManagementController.cs",
+              "RelativeToolTip": "ReportingApplication\\Interfaces\\Controllers\\ITicketManagementController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-24T17:56:06.869Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Attachment.cs",
-              "DocumentMoniker": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\Models\\Attachment.cs",
-              "RelativeDocumentMoniker": "ReportingApplication\\Models\\Attachment.cs",
-              "ToolTip": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\Models\\Attachment.cs",
-              "RelativeToolTip": "ReportingApplication\\Models\\Attachment.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Title": "TicketManagementController.cs",
+              "DocumentMoniker": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\Controllers\\TicketManagementController.cs",
+              "RelativeDocumentMoniker": "ReportingApplication\\Controllers\\TicketManagementController.cs",
+              "ToolTip": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\Controllers\\TicketManagementController.cs",
+              "RelativeToolTip": "ReportingApplication\\Controllers\\TicketManagementController.cs",
+              "ViewState": "AQIAAEUAAAAAAAAAAAAiwGkAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-03T12:49:43.079Z"
+              "WhenOpened": "2024-09-24T17:55:36.432Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -132,10 +220,34 @@
               "RelativeDocumentMoniker": "ReportingApplication\\Services\\TicketManagementService.cs",
               "ToolTip": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\Services\\TicketManagementService.cs",
               "RelativeToolTip": "ReportingApplication\\Services\\TicketManagementService.cs",
-              "ViewState": "AQIAADgAAAAAAAAAAAAAwGQAAAAJAAAA",
+              "ViewState": "AQIAANkAAAAAAAAAAAAowOkAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-03T12:49:59.525Z",
+              "WhenOpened": "2024-09-24T17:55:32.141Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AutoMapper.cs",
+              "DocumentMoniker": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\AutoMapper\\AutoMapper.cs",
+              "RelativeDocumentMoniker": "ReportingApplication\\AutoMapper\\AutoMapper.cs",
+              "ToolTip": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\AutoMapper\\AutoMapper.cs",
+              "RelativeToolTip": "ReportingApplication\\AutoMapper\\AutoMapper.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-24T19:59:15.009Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "ReportingApplication\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\szymo\\OneDrive\\Pulpit\\TicketPoint\\ReportingApplication\\ReportingApplication\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "ReportingApplication\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAC0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-24T18:01:28.245Z"
             }
           ]
         }

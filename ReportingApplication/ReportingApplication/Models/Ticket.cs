@@ -12,6 +12,7 @@ namespace ReportingApplication.Models
         public string Status { get; set; } = "Oczekiwanie";
         public bool IsRead { get; set; } = false;
         public List<Attachment> Attachments { get; set; } = new List<Attachment>();
-        public List<Recipent> Recipents { get; set; } = new List<Recipent>();
+        public Guid? RecipentId { get; set; }
+        public Recipent? Recipent { get; set; }
     }
 }

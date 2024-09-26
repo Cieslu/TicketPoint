@@ -20,6 +20,7 @@ namespace ReportingApplication.AutoMapper
             CreateMap<Ticket, TicketDTO>();
             CreateMap<Attachment, AttachmentDTO>();
             CreateMap<Recipent, RecipentDTO>();
+            CreateMap<RecipentDTO, Recipent>();
         }
     }
 }

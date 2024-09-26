@@ -11,9 +11,9 @@ namespace ReportingApplication.ModelsDTO.Ticket
         public required string Description { get; set; }
         public required string Status { get; set; }
         public required bool IsRead { get; set; }
-        public required UserDTO user { get; set; } 
+        public required UserDTO User { get; set; } 
         public required List<AttachmentDTO?> Attachments { get; set; }
-        public required List<RecipentDTO?> Recipents { get; set; }
+        public required RecipentDTO Recipent { get; set; }
 
     }
 }
