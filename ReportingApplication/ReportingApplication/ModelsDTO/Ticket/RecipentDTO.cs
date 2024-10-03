@@ -2,10 +2,10 @@
 
 namespace ReportingApplication.ModelsDTO.Ticket
 {
-    public class RecipentDTO
+    public class RecipentDTO(string userId, string recipentName, string recipentColor)
     {
-        public Guid? Id { get; set; }
-        public string? UserId { get; set; }
-        public string? RecipentName { get; set; }
+        public string? UserId { get; set; } = userId;
+        public string? RecipentName { get; set; } = recipentName;
+        public string? RecipentColor { get; set; } = recipentColor;
     }
 }

@@ -42,7 +42,7 @@ namespace ReportingApplication.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles", (string)null);
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -57,7 +57,7 @@ namespace ReportingApplication.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles", (string)null);
+                    b.ToTable("UserRoles", (string)null);
                 });
 
             modelBuilder.Entity("ReportingApplication.Models.Attachment", b =>
@@ -86,25 +86,6 @@ namespace ReportingApplication.Migrations
                     b.ToTable("Attachments");
                 });
 
-            modelBuilder.Entity("ReportingApplication.Models.Recipent", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("RecipentName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Recipents");
-                });
-
             modelBuilder.Entity("ReportingApplication.Models.Ticket", b =>
                 {
                     b.Property<Guid>("Id")
@@ -121,9 +102,6 @@ namespace ReportingApplication.Migrations
                     b.Property<bool>("IsRead")
                         .HasColumnType("bit");
 
-                    b.Property<Guid?>("RecipentId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -138,15 +116,31 @@ namespace ReportingApplication.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RecipentId");
-
                     b.ToTable("Tickets");
+                });
+
+            modelBuilder.Entity("ReportingApplication.Models.TicketRecipent", b =>
+                {
+                    b.Property<Guid>("TicketId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("TicketId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("TicketRecipents");
                 });
 
             modelBuilder.Entity("ReportingApplication.Models.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AdminColor")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Branch")
                         .IsRequired()
@@ -200,7 +194,7 @@ namespace ReportingApplication.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -229,23 +223,35 @@ namespace ReportingApplication.Migrations
                     b.Navigation("ticket");
                 });
 
-            modelBuilder.Entity("ReportingApplication.Models.Ticket", b =>
+            modelBuilder.Entity("ReportingApplication.Models.TicketRecipent", b =>
                 {
-                    b.HasOne("ReportingApplication.Models.Recipent", "Recipent")
-                        .WithMany("Tickets")
-                        .HasForeignKey("RecipentId");
+                    b.HasOne("ReportingApplication.Models.Ticket", "Ticket")
+                        .WithMany("TicketRecipents")
+                        .HasForeignKey("TicketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Recipent");
-                });
+                    b.HasOne("ReportingApplication.Models.User", "User")
+                        .WithMany("TicketRecipents")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("ReportingApplication.Models.Recipent", b =>
-                {
-                    b.Navigation("Tickets");
+                    b.Navigation("Ticket");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ReportingApplication.Models.Ticket", b =>
                 {
                     b.Navigation("Attachments");
+
+                    b.Navigation("TicketRecipents");
+                });
+
+            modelBuilder.Entity("ReportingApplication.Models.User", b =>
+                {
+                    b.Navigation("TicketRecipents");
                 });
 #pragma warning restore 612, 618
         }

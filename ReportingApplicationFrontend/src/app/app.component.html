@@ -34,7 +34,7 @@
           </ul>
           <div>
             @if(role){
-              <span class="fw-bold me-2">Witaj {{userName}} <span class="badge bg-danger rounded-pill me-1">Administrator</span></span>
+              <span class="fw-bold me-2">Witaj {{userName}} <span class="badge rounded-pill me-1" [ngStyle]="{'background-color': adminColor}">Administrator</span></span>
             }@else{
               <span class="fw-bold me-2">Witaj {{userName}} </span>
             }

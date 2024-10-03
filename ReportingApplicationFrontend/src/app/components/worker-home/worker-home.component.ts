@@ -5,6 +5,7 @@ import { IsLoggedService } from '../../services/is_logged/is-logged.service';
 import { RoleService } from '../../services/role/role.service';
 import { TicketFormComponent } from "../ticket-form/ticket-form.component";
 import { ModalComponent } from '../modal/modal.component';
+import { DecodeTokenService } from '../../services/decode_token/decode-token.service';
 
 @Component({
   selector: 'app-worker-home',
@@ -20,7 +21,8 @@ export class WorkerHomeComponent implements OnInit {
 
   constructor(
     private roleService: RoleService,
-    private isLoggedService: IsLoggedService
+    private isLoggedService: IsLoggedService,
+    private decodeTokenService: DecodeTokenService
   ) {}
 
   ngOnInit(): void {
@@ -29,7 +31,7 @@ export class WorkerHomeComponent implements OnInit {
     //     this.role$ = res;
     //   } 
     // });
-    this.userName = this.isLoggedService.takeNameFromToken();
+    this.userName = this.decodeTokenService.getNameFromToken()!;
   }
 
   chooseOpeartion(o: number): void{

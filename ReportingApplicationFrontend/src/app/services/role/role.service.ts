@@ -15,6 +15,7 @@ export class RoleService {
   ) { }
 
   checkRole(userId:string): Observable<string[]>{
+    console.log("dupa");
     return this.httpClient.get<string[]>(`${this.api}/role/${userId}`);
   }
 

@@ -13,29 +13,32 @@ export const routes: Routes = [
     {path: '', redirectTo: 'login', pathMatch: 'full'},
     {path: 'login', component: LoginComponent, title: 'Logowanie'},
 
-    // {path: 'administrator/home', component: AdministratorHomeComponent, title: 'Lista użytkowników', canActivate: [authenticationGuard, authorizationGuard],  data: { role: 'Administrator'},},
-    // {path: 'administrator/users', component: UsersComponent, title: 'Lista użytkowników', canActivate: [authenticationGuard, authorizationGuard],  data: { role: 'Administrator'},},
+    // {path: 'administrator/home', component: AdministratorHomeComponent, title: 'Lista użytkowników', canActivate: [authenticationGuard],  data: { role: 'Administrator'}},
+    // {path: 'administrator/users', component: UsersComponent, title: 'Lista użytkowników', canActivate: [authenticationGuard],  data: { role: 'Administrator'}},
 
 
     {
         path: 'administrator', 
         canActivate: [authenticationGuard],
         canActivateChild: [authenticationChildrenGuard],
-        data: { role: 'Administrator'},
+        data: {role: 'Administrator'},
         children: [
             {
                 title: 'Strona główna', 
                 path: 'home', 
+                data: {role: 'Administrator'},
                 component: AdministratorHomeComponent 
             },
             {
                 title: 'Lista użytkowników', 
                 path: 'users', 
+                data: {role: 'Administrator'},
                 component: UsersComponent
             },
             {
                 title: 'Zgłoszenie', 
-                path: 'ticket/:ticketId', 
+                path: 'ticket/:ticketId',
+                data: {role: 'Administrator'}, 
                 component: TicketComponent
             },
         ],
@@ -44,23 +47,23 @@ export const routes: Routes = [
         path: 'worker', 
         canActivate: [authenticationGuard],
         canActivateChild: [authenticationChildrenGuard],
-        data: { role: 'Worker'},
+        data: {role: 'Worker'},
         children: [
             {
                 title: 'Strona główna', 
                 path: 'home', 
+                data: {role: 'Worker'},
                 component: WorkerHomeComponent 
             },
         ],
     },
-    { path: 'page-forbidden', component: PageForbiddenComponent },
-    { path: '**', component: PageNotFoundComponent }
-
-
-
-
+    { path: 'page-forbidden', component: PageForbiddenComponent, title: 'Strona zabroniona', canActivate: [authenticationGuard]},
+    { path: '**', component: PageNotFoundComponent, title: 'Nie znaleziono strony', canActivate: [authenticationGuard]},
+    
     // {path: 'administrator/users', component: UsersComponent, title: 'Lista użytkowników', canActivate: [authenticationGuard]},
     // {path: 'administrator/ticket/:ticketId', component: TicketComponent, title: 'Zgłoszenie', canActivate: [authenticationGuard]},
+
+
     
     // {path: 'worker/home', component: WorkerHomeComponent, title: 'Strona główna', canActivate: [authenticationGuard]},
 ];

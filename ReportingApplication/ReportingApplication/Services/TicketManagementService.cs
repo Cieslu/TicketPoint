@@ -47,24 +47,24 @@ namespace ReportingApplication.Services
                     {
                         if (formFile?.Length > 0)
                         {
+                            string folderName = "TicketPoint";
                             string extension = Path.GetExtension(formFile.FileName);
                             if (extension != ".pdf" && extension != ".doc" && extension != ".docx" && extension != ".png" && extension != ".jpg" && extension != ".jpeg" && extension != ".txt")
                             {
                                 return null;
                             }
 
-                            string filePath = @$"C:\Ticket App\{ticket.Id}";
+                            string filePath = @$"C:\{folderName}\{ticket.Id}";
 
                             if (!Directory.Exists(filePath))
                             {
                                 Directory.CreateDirectory(filePath);
                             }
 
-
-
-                            filePath = @$"C:\Korner Report\{ticket.Id}\{formFile.FileName}";
+                            filePath = @$"C:\{folderName}\{ticket.Id}\{formFile.FileName}";
                             using (FileStream stream = File.Create(filePath))
                             {
+
                                 await formFile.CopyToAsync(stream);
                             }
 
@@ -104,24 +104,22 @@ namespace ReportingApplication.Services
         {
             try
             {
-                List<Ticket> tickets = await _context.Tickets.ToListAsync();
+                List<Ticket> tickets = await _context.Tickets
+                    .Include(t => t.User)
+                    .Include(t => t.TicketRecipents)
+                        .ThenInclude(tr => tr.Recipent)
+                    .AsNoTracking()
+                    .AsSplitQuery()
+                    .ToListAsync();
 
                 List<TicketDTO> ticketsDTO = _mapper.Map<List<TicketDTO>>(tickets);
 
                 tickets.ForEach(ticket =>
                 {
-                    User? user = _context.Users.Find(ticket.UserId);
-                    Recipent? recipent = _context.Recipents.Find(ticket.RecipentId);
-
-                    if (user is not null)
+                    ticket.TicketRecipents.ForEach(tr =>
                     {
-                        ticketsDTO.Find(x => x.Id == ticket.Id.ToString())!.User = _mapper.Map<UserDTO>(user);
-                    }
-
-                    if(recipent is not null)
-                    {
-                        ticketsDTO.Find(x => x.Id == ticket.Id.ToString())!.Recipent = _mapper.Map<RecipentDTO>(recipent);
-                    }
+                        ticketsDTO.Find(x => x.Id == ticket.Id)!.Recipents.Add(new RecipentDTO(tr.Recipent.Id, $"{tr.Recipent.LastName}{tr.Recipent.FirstName.Remove(1)}", tr.Recipent.AdminColor!));
+                    });
                 });
 
                 return ticketsDTO;
@@ -234,37 +232,46 @@ namespace ReportingApplication.Services
         {
             try
             {
-                Ticket? ticket = await _context.Tickets.FindAsync(ticketId);
+                /* Ticket? ticket = await _context.Tickets
+                     .FindAsync(ticketId);
 
-                if (ticket is null)
+                 if (ticket is null)
+                 {
+                     return false;
+                 }
+
+                 User? user = await _context.Users
+                     .FindAsync(userId);
+
+                 if (user is null)
+                 {
+                     return false;
+                 }*/
+
+                TicketRecipent? tr = await _context.TicketRecipents.FindAsync(ticketId, userId);
+
+                if(tr is not null)
                 {
-                    return false;
-                }
-
-                User? user = await _context.Users.FindAsync(userId);
-
-                if (user is null)
-                {
-                    return false;
-                }
-
-                if (ticket.RecipentId is not null)
-                {
-                    await _context.Tickets
-                        .Where(x => x.RecipentId == ticket.RecipentId)
-                        .ExecuteUpdateAsync(y => y.SetProperty(x => x.RecipentId, (Guid?)null));
-
-                    await _context.Recipents
-                        .Where(x => x.Id == ticket.RecipentId)
+                    await _context.TicketRecipents
+                        .Where(tr => tr.TicketId == ticketId && tr.UserId == userId)
                         .ExecuteDeleteAsync();
 
                     return true;
                 }
 
-                Recipent recipent = new Recipent(userId, $"{user!.LastName}{user!.FirstName.Remove(1)}");
-                ticket.RecipentId = recipent.Id;
+                /*        if (ticket is not null)
+                        {
+                            await _context.TicketRecipents
+                                .Where(tr => tr.TicketId == ticket.Id && tr.UserId == user.Id)
+                                .ExecuteDeleteAsync();
 
-                await _context.Recipents.AddAsync(recipent);
+                            return true;
+                        }*/
+
+                //Recipent recipent = new Recipent(userId, $"{user!.LastName}{user!.FirstName.Remove(1)}", user.AdminColor!);
+                //ticket.RecipentId = recipent.Id;
+
+                await _context.TicketRecipents.AddAsync(new TicketRecipent(ticketId, userId));
                 await _context.SaveChangesAsync();
 
                 return true;

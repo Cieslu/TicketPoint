@@ -63,6 +63,10 @@ namespace MediBookerAPI.Services
                 claims.Add(new Claim("name", user.FirstName));
                 claims.Add(new Claim("id", userId.ToString()));
                 claims.Add(new Claim("userName", $"{user.LastName}{user.FirstName.Remove(1)}"));
+                if (user.IsAdministrator)
+                {
+                    claims.Add(new Claim("color", user.AdminColor!));
+                }
 
                 ICollection<string> roles = await _userManager.GetRolesAsync(user);
                 claims.Add(new Claim("role", roles.First()));

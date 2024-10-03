@@ -13,6 +13,7 @@ import { SuccessService } from '../../services/success/success.service';
 import { NgClass } from '@angular/common';
 import { RoleService } from '../../services/role/role.service';
 import { map, Subscription, take } from 'rxjs';
+import { DecodeTokenService } from '../../services/decode_token/decode-token.service';
 
 @Component({
   selector: 'app-login',
@@ -36,7 +37,9 @@ export class LoginComponent implements OnDestroy {
     private errorService: ErrorService,
     private successService: SuccessService,
     private isLoggedService: IsLoggedService,
-    private roleService: RoleService
+    private roleService: RoleService,
+    private decodeTokenService: DecodeTokenService
+
   ){}
 
   ngOnDestroy(): void {
@@ -52,12 +55,13 @@ export class LoginComponent implements OnDestroy {
       
       this.subscriptionLogin = this.loginService.login(this.loginRequest).subscribe({
         next: (res: AccessToken) => {
-          localStorage.setItem("accessToken", res.accessToken);//Umieszczenie tokenu w localstorage
+          this.decodeTokenService.setTokenAndClaimsFromToken(res.accessToken);
+          //localStorage.setItem("accessToken", res.accessToken);//Umieszczenie tokenu w localstorage
        
           this.spinnerService.setLoading(false);//Wyłączenie spinnera
           this.isLoggedService.setIsLogged(true);
 
-          const role = this.isLoggedService.takeRoleFromToken();
+          const role = this.decodeTokenService.getRoleFromToken();
 
           if(role === "Administrator"){
             this.router.navigate(['/administrator/home']);//Przekierowanie do strony home (to jest dla admina)

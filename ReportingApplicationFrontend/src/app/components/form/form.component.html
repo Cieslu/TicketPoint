@@ -93,11 +93,17 @@
             </div>
             }
         </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="checkboxIsAdministrator" name="isAdministrator"
+        <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" id="checkboxIsAdministrator" name="isAdministrator"
                 [(ngModel)]="formUser.isAdministrator" #isAdministrator="ngModel">
             <label class="form-check-label" for="checkboxIsAdministrator">Czy konto Administratora?</label>
         </div>
+        @if(formUser.isAdministrator){
+            <div class="form-check">
+                <label for="exampleColorInput" class="form-label">Wybierz kolor Administratora:</label>
+                <input type="color" class="form-control form-control-color d-inline ms-2" id="colorInput" [value]="formUser.adminColor" name="adminColor" title="Wybierz kolor administratora" [(ngModel)]="formUser.adminColor" #adminColor="ngModel">
+            </div>
+        }
         <div class="text-center mt-3">
             <button type="submit" class="btn btn-primary"
                 [disabled]="firstName.invalid || lastName.invalid || userName.invalid || email.invalid || (operation === 1 ? null : password.invalid) || branch.invalid || signature.invalid">

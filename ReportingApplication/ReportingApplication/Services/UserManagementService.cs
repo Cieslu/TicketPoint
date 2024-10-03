@@ -96,6 +96,14 @@ namespace ReportingApplication.Services
                 user.Branch = editUserDTO.Branch;
                 user.Signature = editUserDTO.Signature;
                 user.IsAdministrator = editUserDTO.IsAdministrator;
+                if (user.IsAdministrator)
+                {
+                    user.AdminColor = editUserDTO.AdminColor;
+
+                   /* await _context.Recipents
+                        .Where(x => x.UserId == user.Id)
+                        .ExecuteUpdateAsync(y => y.SetProperty(x => x.RecipentColor, user.AdminColor));*/
+                }
 
                 IdentityResult resultCreate = await _userManager.UpdateAsync(user);
 

@@ -6,6 +6,7 @@
         public string FileName { get; set; } = fileName;
         public string FilePath { get; set; } = filePath;
         public Guid TicketId { get; set; } = ticketId;
+
         public Ticket ticket { get; set; } = null!;
     }
 }

@@ -10,7 +10,8 @@ namespace ReportingApplication.Data
         //public DbSet<User> Users { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Attachment> Attachments { get; set; }
-        public DbSet<Recipent> Recipents { get; set; }
+        //public DbSet<Recipent> Recipents { get; set; }
+        public DbSet<TicketRecipent> TicketRecipents { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {}
 
@@ -18,8 +19,14 @@ namespace ReportingApplication.Data
         {
             base.OnModelCreating(builder);
 
+            builder.Ignore<IdentityRoleClaim<string>>();
+            builder.Ignore<IdentityUserClaim<string>>();
+            builder.Ignore<IdentityUserLogin<string>>();
+            builder.Ignore<IdentityUserToken<string>>();
+
             builder.Entity<User>(option =>
             {
+                option.ToTable(name: "Users");
                 //option.Ignore(x => x.NormalizedUserName);
                 //option.Ignore(x => x.NormalizedEmail);
                 option.Ignore(x => x.EmailConfirmed);
@@ -35,13 +42,26 @@ namespace ReportingApplication.Data
 
             builder.Entity<IdentityRole>(option =>
             {
+                option.ToTable(name: "Roles");
                 option.Ignore(x => x.ConcurrencyStamp);
             });
 
-            builder.Ignore<IdentityRoleClaim<string>>();
-            builder.Ignore<IdentityUserClaim<string>>();
-            builder.Ignore<IdentityUserLogin<string>>();
-            builder.Ignore<IdentityUserToken<string>>();
+            builder.Entity<IdentityUserRole<string>>(option =>
+            {
+                option.ToTable(name: "UserRoles");
+            });
+
+            builder.Entity<TicketRecipent>(option =>
+            {
+                option.HasKey(tr => new { tr.TicketId, tr.UserId });
+                option.HasOne(tr => tr.Ticket)
+                      .WithMany(t => t.TicketRecipents)
+                      .HasForeignKey(tr => tr.TicketId);
+                option.HasOne(tr => tr.Recipent)
+                      .WithMany(u => u.TicketRecipents)
+                      .HasForeignKey(tr => tr.UserId);
+            });
+
 
 /*            builder.Entity<Ticket>()
                 .HasOne(t => t.Recipent)

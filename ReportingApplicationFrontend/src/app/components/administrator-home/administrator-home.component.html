@@ -30,7 +30,9 @@
                             </span>
                         </div>
                         <div class="col-2 d-flex justify-content-end ">
-                            <span class="badge bg-danger rounded-pill me-1">{{ticket.recipent?.recipentName}}</span>
+                            @for (recipent of ticket.recipents; track recipent.userId) {
+                                <span class="badge rounded-pill me-1" [ngStyle]="{'background-color': recipent?.recipentColor}">{{recipent?.recipentName}}</span>
+                            }
                             <i class="bi bi-calendar"> {{ticket.created | date:"dd/MM/YYYY"}}</i> 
                         </div>
                     </a>
@@ -50,7 +52,7 @@
                     </div>
                     <div class="col-3 d-flex justify-content-center">
                         <button type="button" class="btn btn-outline-warning" (click)="takeTicket(ticket.id)">
-                            @if(!ticket.recipent?.recipentName){
+                            @if(!isRecipent){
                             <i class="bi bi-bookmark-check-fill"></i>
                             }@else{
                             <i class="bi bi-bookmark-dash-fill"></i>
@@ -62,8 +64,8 @@
                             <i class="bi bi-pen-fill"></i>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Otwarte</a></li>
-                            <li><a class="dropdown-item" href="#">Zamknięte</a></li>
+                            <li><button class="dropdown-item text-primary-emphasis"><i class="bi bi-arrow-clockwise"></i> Przywróć</button></li>
+                            <li><button class="dropdown-item text-danger"><i class="bi bi-x-circle"></i> Zakończ</button></li>
                         </ul>
                     </div>
                     <!-- <button type="button" class="btn btn-outline-success" (click)="isRead(ticket.id)">

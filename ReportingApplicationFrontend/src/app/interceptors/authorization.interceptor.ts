@@ -4,12 +4,14 @@ import { inject } from '@angular/core';
 import { IsLoggedService } from '../services/is_logged/is-logged.service';
 import { Router } from '@angular/router';
 import { RoleService } from '../services/role/role.service';
+import { DecodeTokenService } from '../services/decode_token/decode-token.service';
 2
 export const authorizationInterceptor: HttpInterceptorFn = (req, next) => {
   const isLoggedService = inject(IsLoggedService);
   const roleServie = inject(RoleService);
   const router = inject(Router);
   const errorService = inject(ErrorService);
+  const decodeTokenService = inject(DecodeTokenService);
 
   let authReq: HttpRequest<unknown> = req;
   let is_logged$: boolean = false; 
@@ -22,7 +24,7 @@ export const authorizationInterceptor: HttpInterceptorFn = (req, next) => {
     });
   
     if(is_logged$){
-      const authToken = isLoggedService.takeToken();
+      const authToken = decodeTokenService.getAccessToken();
       authReq = req.clone({
         setHeaders: {
           Authorization: `Bearer ${authToken}`

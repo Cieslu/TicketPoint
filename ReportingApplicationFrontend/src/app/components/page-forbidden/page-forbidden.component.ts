@@ -8,6 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './page-forbidden.component.css'
 })
 export class PageForbiddenComponent {
-  alert: string = "Nie masz wystarczających uprawnień, aby przejść na tę stronę!"
-
+  alert: string = "Nie masz wystarczających uprawnień, aby przejść na tę stronę!";
 }

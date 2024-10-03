@@ -17,30 +17,35 @@ export class IsLoggedService {
   constructor(
     private errorService: ErrorService,
     private successService: SuccessService,
-    private decodeToken: DecodeTokenService,
+    private decodeTokenService: DecodeTokenService,
     private roleService: RoleService
   ) { }
 
   isLogged(): void {
-    const decodeToken = this.decodeToken.getDecodedAccessToken(this.takeToken());
+    console.log("Logged")
+    const decodeToken = this.decodeTokenService.getAccessToken();
     if(!decodeToken){
-      localStorage.removeItem("accessToken");
+      localStorage.clear();
       this.setIsLogged(false);
-      //this.roleService.setRole(false);
     }else{
-      this.checkExpiration(decodeToken.exp);
+      this.checkExpiration(this.decodeTokenService.getExpFromToken()!);
     }
   }
   
   checkExpiration(exp: number): void{
-    if(Date.now() >= exp * 1000){//Sprawdzenie czy token już wygasł
-      localStorage.removeItem("accessToken");
+    console.log(isNaN(exp))
+    if(isNaN(exp)){
+      localStorage.clear();
       this.setIsLogged(false);
-      //this.roleService.setRole(false);
     }else{
-      this.setIsLogged(true);
-      this.errorService.removeError();
-      this.successService.removeSuccess();
+      if(Date.now() >= exp * 1000){//Sprawdzenie czy token już wygasł
+        localStorage.clear();
+        this.setIsLogged(false);
+      }else{
+        this.setIsLogged(true);
+        this.errorService.removeError();
+        this.successService.removeSuccess();
+      }
     }
   }
 
@@ -50,25 +55,5 @@ export class IsLoggedService {
 
   setIsLogged(x: boolean): void {
     this.is_logged$.next(x);
-  }
-
-  takeToken(): string | null{
-    return localStorage.getItem("accessToken");
-  } 
-
-  takeNameFromToken(): string{
-    return this.decodeToken.getDecodedAccessToken(localStorage.getItem("accessToken")).name;
-  }
-
-  takeUserNameFromToken(): string{
-    return this.decodeToken.getDecodedAccessToken(localStorage.getItem("accessToken")).userName;
-  }
-
-  takeIdFromToken(): string{
-    return this.decodeToken.getDecodedAccessToken(localStorage.getItem("accessToken")).id;
-  }
-
-  takeRoleFromToken(): string{
-    return this.decodeToken.getDecodedAccessToken(localStorage.getItem("accessToken")).role;
   }
 }

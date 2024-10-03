@@ -47,11 +47,11 @@ export class UserManagementService {
 
 
   toUser(userDTO: UserDTO): User{
-    return new User(userDTO.id, userDTO.firstName, userDTO.lastName, userDTO.userName, userDTO.email, userDTO.password, userDTO.branch, userDTO.signature, userDTO.isAdministrator, userDTO.locked);
+    return new User(userDTO.id, userDTO.firstName, userDTO.lastName, userDTO.userName, userDTO.email, userDTO.password, userDTO.branch, userDTO.signature, userDTO.isAdministrator, userDTO.locked, userDTO.adminColor);
   }
 
   toUserDTO(user: User): UserDTO {
-    return new UserDTO(user.id, user.firstName, user.lastName, user.userName, user.email, user.password, user.branch, user.signature, user.isAdministrator, user.locked);
+    return new UserDTO(user.id, user.firstName, user.lastName, user.userName, user.email, user.password, user.branch, user.signature, user.isAdministrator, user.locked, user.adminColor);
   }
   
   toChangePasswordDTO(changePassword: ChangePassword): ChangePasswordDTO{

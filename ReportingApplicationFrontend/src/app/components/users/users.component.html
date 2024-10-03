@@ -29,7 +29,7 @@
                                 <i class="bi bi-envelope"></i> {{user.email}}
                             </span>
                             @if(user.isAdministrator){
-                                <span class="badge bg-danger rounded-pill me-1">Administrator</span>
+                                <span class="badge rounded-pill me-1" [ngStyle]="{'background-color': user.adminColor}">Administrator</span>
                             }
                             <span class="badge bg-primary rounded-pill me-1">{{user.branch}}</span>
                             <span class="badge bg-info rounded-pill">{{user.signature}}</span>

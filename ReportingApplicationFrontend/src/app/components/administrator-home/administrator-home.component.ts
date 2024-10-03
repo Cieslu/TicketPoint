@@ -15,6 +15,7 @@ import { CommonModule, NgClass } from '@angular/common';
 import { LogoutService } from '../../services/logout/logout.service';
 import { IsLoggedService } from '../../services/is_logged/is-logged.service';
 import { Recipent } from '../../models/recipent';
+import { DecodeTokenService } from '../../services/decode_token/decode-token.service';
 
 @Component({
   selector: 'app-administrator-home',
@@ -33,12 +34,14 @@ export class AdministratorHomeComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   action: number = 0;
   placeholder: string = "Wyszukaj zgłoszenie";
+  isRecipent: boolean = false;
 
   constructor(
     private ticketManagementService: TicketManagementService,
     private spinnerService: SpinnerService,
     private logoutService: LogoutService,
-    private isLoggedService: IsLoggedService
+    private isLoggedService: IsLoggedService,
+    private decodeTokenService: DecodeTokenService
   ) { }
 
   ngOnInit(): void {
@@ -56,7 +59,8 @@ export class AdministratorHomeComponent implements OnInit, OnDestroy {
           this.tickets.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
         });
         this.searchedTickets = JSON.parse(JSON.stringify(this.tickets));
-        this.tickets.forEach(x => {this.branches.add(x.user!.signature), console.log(x.recipent)});//W tym przypadku sa robione kopie wartości
+        this.tickets.forEach(x => {this.branches.add(x.user!.signature)});//W tym przypadku sa robione kopie wartości
+        this.checkRecipentIdInTicket();
       },
       error: err => {
         this.spinnerService.setLoading(false);
@@ -72,13 +76,11 @@ export class AdministratorHomeComponent implements OnInit, OnDestroy {
   isRead(ticketId: string): void {
     this.ticketManagementService.isRead(ticketId).subscribe({
       next: () => {
-        const indexFromTickets = this.tickets.findIndex(x => x.id === ticketId);
-        const indexFromSearchedTickets = this.searchedTickets.findIndex(x => x.id === ticketId);
-        if (indexFromTickets !== -1 && indexFromSearchedTickets !== -1) {
-          const checkedTicket = this.tickets[indexFromTickets];
-          const checkedSearchedTicket = this.searchedTickets[indexFromSearchedTickets];
-          checkedTicket.isRead = checkedTicket.isRead ? false : true;
-          checkedSearchedTicket.isRead = checkedSearchedTicket.isRead ? false : true;
+        const ticket = this.tickets.find(x => x.id === ticketId);
+        const searchedTicket = this.searchedTickets.find(x => x.id === ticketId);
+        if (ticket !== undefined && searchedTicket !== undefined) {
+          ticket.isRead = ticket.isRead ? false : true;
+          searchedTicket.isRead = searchedTicket.isRead ? false : true;
         }
       },
       error: () => {
@@ -88,20 +90,26 @@ export class AdministratorHomeComponent implements OnInit, OnDestroy {
   }
   
   takeTicket(ticketId: string): void {
-    this.ticketManagementService.takeTicket(ticketId, this.isLoggedService.takeIdFromToken()).subscribe({
+    const userId = this.decodeTokenService.getIdFromToken();
+    this.ticketManagementService.takeTicket(ticketId, userId!).subscribe({
       next: () => {
         const ticket = this.tickets.find(x => x.id === ticketId);
         const searchedTicket = this.searchedTickets.find(x => x.id === ticketId);
         if (ticket !== undefined && searchedTicket !== undefined) {
-          console.log(ticket.recipent)
-          if(ticket.recipent?.recipentName !== null && ticket.recipent?.recipentName !== undefined){
-            console.log("rozny")
-            ticket.recipent!.id = null; 
-            ticket.recipent!.userId = null; 
-            ticket.recipent!.recipentName = null; 
+          if(ticket.recipents?.length !== 0){
+            const recipent = ticket.recipents!.find(r => r.userId === userId);
+            if (recipent === undefined) {//Gdy nie ma odbiorcy, jest on dodawany do listy odbiorców danego tikcetu
+              ticket.recipents?.push(new Recipent(userId, this.decodeTokenService.getUserNameFromToken(), this.decodeTokenService.getColorFromToken()));
+            }else{
+                const indexFromRecipents = ticket.recipents!.findIndex(r => r.userId === userId);
+                ticket.recipents!.splice(indexFromRecipents, 1);
+                localStorage.setItem("isRecipent", "false");
+                this.getIsRecipentFromLocalStorage();
+            }         
           }else{
-            console.log("nie rozny " + this.isLoggedService.takeUserNameFromToken())
-            ticket.recipent!.recipentName = this.isLoggedService.takeUserNameFromToken();
+            ticket.recipents?.push(new Recipent(userId, this.decodeTokenService.getUserNameFromToken(), this.decodeTokenService.getColorFromToken()));
+            localStorage.setItem("isRecipent", "true");
+            this.getIsRecipentFromLocalStorage();
           }
         }
       },
@@ -117,5 +125,32 @@ export class AdministratorHomeComponent implements OnInit, OnDestroy {
 
   searchBranch(searchText: string): void {
     this.tickets = JSON.parse(JSON.stringify(this.searchedTickets.filter(x => x.user.signature.toUpperCase().includes(searchText.toUpperCase().trim()))));//Trzeba zrobić głęboką kopię, aby nie pracować na refrencji
+  }
+
+  checkRecipentIdInTicket(){
+    const userId = this.decodeTokenService.getIdFromToken();
+    let ticketHasRecipent = false;
+    let ticketHasRecipentSearched = false;
+
+    this.tickets.map(t => t.recipents?.map(r => {
+      if(r.userId === userId){
+        ticketHasRecipent = true;
+      }
+    }));
+
+    this.searchedTickets.map(st => st.recipents?.map(r => {
+      if(r.userId === userId){
+        ticketHasRecipentSearched = true;
+      }
+    }));
+
+    if(ticketHasRecipent && ticketHasRecipentSearched){
+      localStorage.setItem("isRecipent", "true");
+      this.getIsRecipentFromLocalStorage();
+    }
+  }
+
+  getIsRecipentFromLocalStorage(){//Funkcja sprawdza czy zalogowany admin przyjął dany ticket, czy nie, jeśli tak na zgłoszeniu pojawi się jego userName (isRecipent jest odczytywany z localStorage)
+    this.isRecipent = localStorage.getItem("isRecipent") === "true";
   }
 }

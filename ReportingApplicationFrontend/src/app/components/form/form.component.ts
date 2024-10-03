@@ -12,7 +12,7 @@ import { NgClass } from '@angular/common';
   styleUrl: './form.component.css'
 })
 export class FormComponent implements OnChanges{
-  formUser: User = new User("", "", "", "", "", "", "", "", false, false);
+  formUser: User = new User("", "", "", "", "", "", "", "", false, false, "#000000");
   @Input() userToEdit!: User;
   @Input() operation: number = 0;
   @Output() formEvent = new EventEmitter<User>;
@@ -29,6 +29,9 @@ export class FormComponent implements OnChanges{
 
   execForm(form: NgForm) {
     if (this.operation === 4) {
+      if(this.formUser.isAdministrator === false){//Gdy uzytkownik nie jest adminem, właściość "adminColor" jest ustawiana na null
+        this.formUser.adminColor = null;
+      }
       this.formEvent.emit(this.formUser);
       this.successService.getSuccess().subscribe(x => { //Gdy pomyślnie doda się użytkownika, formularz czyści się
         if (x === 3) {

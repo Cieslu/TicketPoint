@@ -19,7 +19,7 @@ export class LogoutService {
   ) { }
 
   logout(){
-    localStorage.removeItem("accessToken");
+    localStorage.clear();
     this.isLoggedService.setIsLogged(false);
     //this.roleService.setRole(false);
     this.successService.setSuccess(2, "");
@@ -27,7 +27,7 @@ export class LogoutService {
   }
 
   logoutErr401(){
-    localStorage.removeItem("accessToken");
+    localStorage.clear();
     this.isLoggedService.setIsLogged(false);
     //this.roleService.setRole(false);
     this.errorService.setError(-1, "");

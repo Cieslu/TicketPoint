@@ -7,6 +7,7 @@ import { SuccessService } from '../../services/success/success.service';
 import { TicketManagementService } from '../../services/ticketManagement/ticketManagement.service';
 import { IsLoggedService } from '../../services/is_logged/is-logged.service';
 import { UserDTO } from '../../modelsDTO/userDTO';
+import { DecodeTokenService } from '../../services/decode_token/decode-token.service';
 
 @Component({
   selector: 'app-ticket-form',
@@ -24,11 +25,12 @@ export class TicketFormComponent {
   constructor(
     private successService: SuccessService,
     private ticketManagementService: TicketManagementService,
-    private isLoggedService: IsLoggedService
+    private isLoggedService: IsLoggedService,
+    private decodeTokenService: DecodeTokenService
   ){}
 
   execForm(ticketForm: NgForm) {
-    this.ticket.userId = this.isLoggedService.takeIdFromToken();
+    this.ticket.userId = this.decodeTokenService.getIdFromToken()!;
     this.formEvent.emit(this.ticket);
     this.successService.getSuccess().subscribe(x => { //Gdy pomyślnie doda się zgłoszenie, formularz czyści się
       if (x === 9) {

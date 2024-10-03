@@ -8,11 +8,12 @@ import { ModalComponent } from '../modal/modal.component';
 import { SuccessComponent } from '../success/success.component';
 import { ErrorComponent } from '../error/error.component';
 import { SearchComponent } from '../search/search.component';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [SpinnerComponent, ModalComponent, SuccessComponent, ErrorComponent, SearchComponent],
+  imports: [SpinnerComponent, ModalComponent, SuccessComponent, ErrorComponent, SearchComponent, NgStyle],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })

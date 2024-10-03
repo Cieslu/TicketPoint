@@ -16,6 +16,7 @@ import { TicketManagementService } from '../../services/ticketManagement/ticketM
 import { Ticket } from '../../models/ticket';
 import { map, tap } from 'rxjs';
 import { ErrorComponent } from '../error/error.component';
+import { DecodeTokenService } from '../../services/decode_token/decode-token.service';
 
 @Component({
   selector: 'app-modal',
@@ -43,7 +44,8 @@ export class ModalComponent implements OnChanges {
     private successService: SuccessService,
     private errorService: ErrorService,
     private logoutService: LogoutService,
-    private ticketManagementService: TicketManagementService
+    private ticketManagementService: TicketManagementService,
+    private decodeToken: DecodeTokenService
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -85,6 +87,9 @@ export class ModalComponent implements OnChanges {
     this.userManagementService.editUser(formUser).subscribe({
       next: () => {
         this.updateUser.emit(formUser); //To jest po to aby zaktualizować listę użytkowników po aktualziacji któregoś z nich
+        if(formUser.id === this.decodeToken.getIdFromToken()){
+          localStorage.setItem("color", formUser.adminColor!);
+        }
         this.spinnerService.setLoading(false);
         this.button.nativeElement.click();
         this.successService.setSuccess(5, name);

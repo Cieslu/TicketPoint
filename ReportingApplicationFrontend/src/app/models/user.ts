@@ -4,14 +4,15 @@ export class User{
     lastName: string;
     userName: string;
     email: string;
-    password: string;
+    password: string | null;
     branch: string;
     signature: string;
     isAdministrator: boolean;
     locked: boolean;
+    adminColor?: string | null;
     name?: string;//Wykorzystywany do wyszukiwania
 
-    constructor(_id: string, _firstName: string, _lastName: string, _userName: string, _email: string, _password: string, _branch: string, _signatue: string, _isAdministrator: boolean, _locked: boolean){
+    constructor(_id: string, _firstName: string, _lastName: string, _userName: string, _email: string, _password: string | null, _branch: string, _signatue: string, _isAdministrator: boolean, _locked: boolean, _adminColor?: string | null){
         this.id = _id ?? null;
         this.firstName = _firstName;
         this.lastName = _lastName;
@@ -22,6 +23,7 @@ export class User{
         this.signature = _signatue;
         this.isAdministrator = _isAdministrator;
         this.locked = _locked;
+        this.adminColor = _adminColor;
         this.name = `${this.firstName} ${this.lastName} ${this.lastName} ${this.firstName} ${this.userName} ${this.email}`;
     }
 }
