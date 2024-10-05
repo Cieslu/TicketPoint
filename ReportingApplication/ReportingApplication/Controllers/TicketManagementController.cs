@@ -109,5 +109,19 @@ namespace ReportingApplication.Controllers
 
             return Ok();
         }
+
+        [HttpPut("closeOrOpenTicket/{ticketId}")]
+        [Authorize(Roles = "Administrator")]
+        public async Task<ActionResult<bool>> closeOrOpenTicket(Guid ticketId)
+        {
+            bool result = await _ticketService.closeOrOpenTicket(ticketId);
+
+            if (result == false)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
     }
 }

@@ -35,6 +35,7 @@ export class AdministratorHomeComponent implements OnInit, OnDestroy {
   action: number = 0;
   placeholder: string = "Wyszukaj zgłoszenie";
   isRecipent: boolean = false;
+  userId!: string;
 
   constructor(
     private ticketManagementService: TicketManagementService,
@@ -46,6 +47,8 @@ export class AdministratorHomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptionSpinner = this.spinnerService.loading().subscribe(x => this.isLoading = x);
+    this.userId = this.decodeTokenService.getIdFromToken()!;
+
 
     this.subscriptionShowTicket = this.ticketManagementService.showTickets().subscribe({
       next: (res: TicketDTO[]) => {
@@ -60,7 +63,7 @@ export class AdministratorHomeComponent implements OnInit, OnDestroy {
         });
         this.searchedTickets = JSON.parse(JSON.stringify(this.tickets));
         this.tickets.forEach(x => {this.branches.add(x.user!.signature)});//W tym przypadku sa robione kopie wartości
-        this.checkRecipentIdInTicket();
+        // this.checkRecipentIdInTicket();
       },
       error: err => {
         this.spinnerService.setLoading(false);
@@ -90,26 +93,27 @@ export class AdministratorHomeComponent implements OnInit, OnDestroy {
   }
   
   takeTicket(ticketId: string): void {
-    const userId = this.decodeTokenService.getIdFromToken();
-    this.ticketManagementService.takeTicket(ticketId, userId!).subscribe({
+    this.ticketManagementService.takeTicket(ticketId, this.userId!).subscribe({
       next: () => {
         const ticket = this.tickets.find(x => x.id === ticketId);
         const searchedTicket = this.searchedTickets.find(x => x.id === ticketId);
         if (ticket !== undefined && searchedTicket !== undefined) {
           if(ticket.recipents?.length !== 0){
-            const recipent = ticket.recipents!.find(r => r.userId === userId);
+            const recipent = ticket.recipents!.find(r => r.userId === this.userId);
             if (recipent === undefined) {//Gdy nie ma odbiorcy, jest on dodawany do listy odbiorców danego tikcetu
-              ticket.recipents?.push(new Recipent(userId, this.decodeTokenService.getUserNameFromToken(), this.decodeTokenService.getColorFromToken()));
+              ticket.recipents?.push(new Recipent(this.userId, this.decodeTokenService.getUserNameFromToken(), this.decodeTokenService.getColorFromToken()));
+              // this.setIsRecipentInLocalStorage("true");
+              // this.getIsRecipentFromLocalStorage();
             }else{
-                const indexFromRecipents = ticket.recipents!.findIndex(r => r.userId === userId);
+                const indexFromRecipents = ticket.recipents!.findIndex(r => r.userId === this.userId);
                 ticket.recipents!.splice(indexFromRecipents, 1);
-                localStorage.setItem("isRecipent", "false");
-                this.getIsRecipentFromLocalStorage();
+                // this.setIsRecipentInLocalStorage("false");
+                // this.getIsRecipentFromLocalStorage();
             }         
           }else{
-            ticket.recipents?.push(new Recipent(userId, this.decodeTokenService.getUserNameFromToken(), this.decodeTokenService.getColorFromToken()));
-            localStorage.setItem("isRecipent", "true");
-            this.getIsRecipentFromLocalStorage();
+            ticket.recipents?.push(new Recipent(this.userId, this.decodeTokenService.getUserNameFromToken(), this.decodeTokenService.getColorFromToken()));
+            // this.setIsRecipentInLocalStorage("true");
+            // this.getIsRecipentFromLocalStorage();
           }
         }
       },
@@ -127,30 +131,50 @@ export class AdministratorHomeComponent implements OnInit, OnDestroy {
     this.tickets = JSON.parse(JSON.stringify(this.searchedTickets.filter(x => x.user.signature.toUpperCase().includes(searchText.toUpperCase().trim()))));//Trzeba zrobić głęboką kopię, aby nie pracować na refrencji
   }
 
-  checkRecipentIdInTicket(){
-    const userId = this.decodeTokenService.getIdFromToken();
-    let ticketHasRecipent = false;
-    let ticketHasRecipentSearched = false;
-
-    this.tickets.map(t => t.recipents?.map(r => {
-      if(r.userId === userId){
-        ticketHasRecipent = true;
+  closeOrOpenTicket(ticketId: string){
+    this.ticketManagementService.closeOrOpenTicket(ticketId).subscribe({
+      next: () => {
+        const ticket = this.tickets.find(x => x.id === ticketId);
+        const searchedTicket = this.searchedTickets.find(x => x.id === ticketId);
+        if (ticket !== undefined && searchedTicket !== undefined) {
+          ticket.isFinished = ticket.isFinished ? false : true;
+          searchedTicket.isFinished = searchedTicket.isFinished ? false : true;
+        }
+      },
+      error: () => {
+        this.logoutService.logoutErr401();
       }
-    }));
-
-    this.searchedTickets.map(st => st.recipents?.map(r => {
-      if(r.userId === userId){
-        ticketHasRecipentSearched = true;
-      }
-    }));
-
-    if(ticketHasRecipent && ticketHasRecipentSearched){
-      localStorage.setItem("isRecipent", "true");
-      this.getIsRecipentFromLocalStorage();
-    }
+    });
   }
 
-  getIsRecipentFromLocalStorage(){//Funkcja sprawdza czy zalogowany admin przyjął dany ticket, czy nie, jeśli tak na zgłoszeniu pojawi się jego userName (isRecipent jest odczytywany z localStorage)
-    this.isRecipent = localStorage.getItem("isRecipent") === "true";
-  }
+  // checkRecipentIdInTicket(){
+  //   const userId = this.decodeTokenService.getIdFromToken();
+  //   let ticketHasRecipent = false;
+  //   let ticketHasRecipentSearched = false;
+
+  //   this.tickets.map(t => t.recipents?.map(r => {
+  //     if(r.userId === userId){
+  //       ticketHasRecipent = true;
+  //     }
+  //   }));
+
+  //   this.searchedTickets.map(st => st.recipents?.map(r => {
+  //     if(r.userId === userId){
+  //       ticketHasRecipentSearched = true;
+  //     }
+  //   }));
+
+  //   if(ticketHasRecipent && ticketHasRecipentSearched){
+  //     localStorage.setItem("isRecipent", "true");
+  //     this.getIsRecipentFromLocalStorage();
+  //   }
+  // }
+
+  // getIsRecipentFromLocalStorage(){//Funkcja sprawdza czy zalogowany admin przyjął dany ticket, czy nie, jeśli tak na zgłoszeniu pojawi się jego userName (isRecipent jest odczytywany z localStorage)
+  //   this.isRecipent = localStorage.getItem("isRecipent") === "true";
+  // }
+
+  // setIsRecipentInLocalStorage(isRecipent: string){
+  //   localStorage.setItem("isRecipent", isRecipent);
+  // }
 }

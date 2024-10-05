@@ -12,21 +12,21 @@ export class Ticket {
     title: string;
     description: string;
     isRead: boolean;
-    status: string;
+    isFinished: boolean;
     user: User;
     files?: FileList;
     attachments?: Attachment[];
     recipents?: Recipent[] | null;
     name?: string;//Wykorzystywany do wyszukiwania
 
-    constructor(_id: string, _userId: string, _created: string, _title: string, _description: string, _isRead: boolean, _status: string, _user: UserDTO, _attachments?: AttachmentDTO[], _files?: FileList, _recipent?: RecipentDTO[]) {
+    constructor(_id: string, _userId: string, _created: string, _title: string, _description: string, _isRead: boolean, _isFinished: boolean, _user: UserDTO, _attachments?: AttachmentDTO[], _files?: FileList, _recipent?: RecipentDTO[]) {
         this.id = _id;
         this.userId = _userId ?? null;
         this.created = _created;
         this.title = _title;
         this.description = _description;
         this.isRead = _isRead;
-        this.status = _status;
+        this.isFinished = _isFinished;
         this.user = _user;
         this.attachments = _attachments;
         this.files = _files;

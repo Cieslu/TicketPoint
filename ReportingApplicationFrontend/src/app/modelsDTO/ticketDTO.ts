@@ -12,20 +12,20 @@ export class TicketDTO {
     title: string;
     description: string;
     isRead: boolean;
-    status: string;
+    isFinished: boolean;
     files?: FileList;
     user?: UserDTO;
     attachments?: AttachmentDTO[];
     recipents?: RecipentDTO[];
 
-    constructor(_id: string, _userId: string, _created: string, _title: string, _description: string, _isRead: boolean, _status: string, _files?: FileList, _user?: User, _attachments?: Attachment[], _recipent?: Recipent[]) {
+    constructor(_id: string, _userId: string, _created: string, _title: string, _description: string, _isRead: boolean, _isFinished: boolean, _files?: FileList, _user?: User, _attachments?: Attachment[], _recipent?: Recipent[]) {
         this.id = _id;
         this.userId = _userId;
         this.created = _created ?? null;
         this.title = _title;
         this.description = _description;
         this.isRead = _isRead;
-        this.status = _status;
+        this.isFinished = _isFinished;
         this.files = _files;
         this.user = _user;
         this.attachments = _attachments;

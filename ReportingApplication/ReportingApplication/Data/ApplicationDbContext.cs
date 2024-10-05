@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using ReportingApplication.Models;
 
 namespace ReportingApplication.Data
@@ -56,16 +57,19 @@ namespace ReportingApplication.Data
                 option.HasKey(tr => new { tr.TicketId, tr.UserId });
                 option.HasOne(tr => tr.Ticket)
                       .WithMany(t => t.TicketRecipents)
-                      .HasForeignKey(tr => tr.TicketId);
+                      .HasForeignKey(tr => tr.TicketId)
+                      .OnDelete(DeleteBehavior.NoAction);
                 option.HasOne(tr => tr.Recipent)
                       .WithMany(u => u.TicketRecipents)
-                      .HasForeignKey(tr => tr.UserId);
+                      .HasForeignKey(tr => tr.UserId)
+                      .OnDelete(DeleteBehavior.NoAction);
             });
 
 
 /*            builder.Entity<Ticket>()
                 .HasOne(t => t.Recipent)
                 .WithMany(r => r.Tickets)
+                .HasForeignKey(t => t.RecipentId)
                 .HasForeignKey(t => t.RecipentId)
                 .OnDelete(DeleteBehavior.ClientSetNull);*/
         }

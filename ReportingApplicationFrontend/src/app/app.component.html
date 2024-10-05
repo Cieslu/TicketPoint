@@ -1,5 +1,5 @@
-<header>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+<header class="header-f-size">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary header-f-size">
     <div class="container-fluid">
       @if(role){
         <a class="navbar-brand fw-bold fs-3" routerLink="/administrator/home">
@@ -38,7 +38,7 @@
             }@else{
               <span class="fw-bold me-2">Witaj {{userName}} </span>
             }
-            <button class="btn btn-secondary" (click)="logout()">Wyloguj się</button>
+            <button class="btn btn-secondary header-f-size" (click)="logout()">Wyloguj się</button>
           </div>
         </div>
       }
@@ -46,7 +46,7 @@
   </nav>
 </header>
 
-<main class="container my-5">
+<main class="container my-5 body-f-size">
   @if(error_is_visible){
     <app-error></app-error>
   }

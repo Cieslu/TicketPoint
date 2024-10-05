@@ -22,7 +22,6 @@ export class IsLoggedService {
   ) { }
 
   isLogged(): void {
-    console.log("Logged")
     const decodeToken = this.decodeTokenService.getAccessToken();
     if(!decodeToken){
       localStorage.clear();
@@ -33,7 +32,6 @@ export class IsLoggedService {
   }
   
   checkExpiration(exp: number): void{
-    console.log(isNaN(exp))
     if(isNaN(exp)){
       localStorage.clear();
       this.setIsLogged(false);

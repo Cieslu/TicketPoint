@@ -9,7 +9,7 @@ namespace ReportingApplication.Models
         public DateTime Created { get; set; } = DateTime.Now;
         public required string Title { get; set; }
         public required string Description { get; set; }
-        public string Status { get; set; } = "Oczekujące";
+        public bool isFinished { get; set; } = false;
         public bool IsRead { get; set; } = false;
 
         public User User { get; set; } = null!;

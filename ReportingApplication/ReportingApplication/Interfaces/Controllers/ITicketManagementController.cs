@@ -12,6 +12,6 @@ namespace ReportingApplication.Interfaces.Controllers
         public Task<ActionResult> downloadAttachment(Guid ticketId, int attachmentId);
         public Task<ActionResult<bool>> isRead(Guid ticketId);
         public Task<ActionResult<bool>> takeTicket(string userId, Guid ticketId);
-
+        public Task<ActionResult<bool>> closeOrOpenTicket(Guid ticketId);
     }
 }

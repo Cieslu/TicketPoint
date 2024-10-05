@@ -18,7 +18,7 @@ import { DecodeTokenService } from '../../services/decode_token/decode-token.ser
 })
 export class TicketFormComponent {
   @Output() formEvent = new EventEmitter<Ticket>;
-  ticket: Ticket = new Ticket("", "", "", "", "", false, "", new UserDTO("", "", "" , "", "", "", "", "", false, false));
+  ticket: Ticket = new Ticket("", "", "", "", "", false, false, new UserDTO("", "", "" , "", "", "", "", "", false, false));
   recipient: string = "Dział IT i Wdrożeń";
   isLoading: boolean = false;
 

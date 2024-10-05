@@ -46,7 +46,6 @@ export class AppComponent implements OnInit {
 
     this.isLoggedService.getIsLogged().subscribe({
       next: (x: boolean) => {
-        console.log("APP: " + x)
         this.is_logged = x;
         if (x) {
           this.role = this.decodeTokenService.getRoleFromToken() === "Administrator" ? true : false;//Gdy rola to "Administrator", role jest ustawiane na true, w przeciwnym wypadku jest false

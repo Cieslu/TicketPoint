@@ -118,7 +118,7 @@ namespace ReportingApplication.Services
                 {
                     ticket.TicketRecipents.ForEach(tr =>
                     {
-                        ticketsDTO.Find(x => x.Id == ticket.Id)!.Recipents.Add(new RecipentDTO(tr.Recipent.Id, $"{tr.Recipent.LastName}{tr.Recipent.FirstName.Remove(1)}", tr.Recipent.AdminColor!));
+                        ticketsDTO.Find(x => x.Id == ticket.Id)!.Recipents.Add(new RecipentDTO(tr.Recipent.Id, $"{tr.Recipent.LastName}{tr.Recipent.FirstName.Remove(1)}", tr.Recipent.AdminColor!));//Tutaj dodane są dodawani odbiorcy do listy, która znajduje się w ticketDTO
                     });
                 });
 
@@ -135,30 +135,25 @@ namespace ReportingApplication.Services
             try
             {
                 Ticket? ticket = await _context.Tickets
-                    .Include(x => x.Attachments)
+                    .Include(t => t.Attachments)
+                    .Include(t => t.User)
+                    .Include(t => t.TicketRecipents)
+                        .ThenInclude(tr => tr.Recipent)
                     .AsSplitQuery()
-                    .FirstOrDefaultAsync(x => x.Id == ticketId);
+                    .SingleOrDefaultAsync(x => x.Id == ticketId);
 
-
-                if (ticket is null)
-                {
-                    return null;
-                }
-
-                if (!ticket.IsRead)
+                if (!ticket!.IsRead)
                 {
                     ticket.IsRead = true;//Zmieniono na true, gdyż ticket został odczytany
                     await _context.SaveChangesAsync();
                 }
 
                 TicketDTO ticketDTO = _mapper.Map<TicketDTO>(ticket);
-
-                User? user = _context.Users.Find(ticket.UserId);
-
-                if (user is not null)
+    
+                ticket.TicketRecipents.ForEach(tr =>
                 {
-                    ticketDTO.User = _mapper.Map<UserDTO>(user);
-                }
+                    ticketDTO.Recipents.Add(new RecipentDTO(tr.Recipent.Id, $"{tr.Recipent.LastName}{tr.Recipent.FirstName.Remove(1)}", tr.Recipent.AdminColor!));//Tutaj dodane są dodawani odbiorcy do listy, która znajduje się w ticketDTO
+                });
 
                 return ticketDTO;
             }
@@ -232,22 +227,6 @@ namespace ReportingApplication.Services
         {
             try
             {
-                /* Ticket? ticket = await _context.Tickets
-                     .FindAsync(ticketId);
-
-                 if (ticket is null)
-                 {
-                     return false;
-                 }
-
-                 User? user = await _context.Users
-                     .FindAsync(userId);
-
-                 if (user is null)
-                 {
-                     return false;
-                 }*/
-
                 TicketRecipent? tr = await _context.TicketRecipents.FindAsync(ticketId, userId);
 
                 if(tr is not null)
@@ -259,18 +238,6 @@ namespace ReportingApplication.Services
                     return true;
                 }
 
-                /*        if (ticket is not null)
-                        {
-                            await _context.TicketRecipents
-                                .Where(tr => tr.TicketId == ticket.Id && tr.UserId == user.Id)
-                                .ExecuteDeleteAsync();
-
-                            return true;
-                        }*/
-
-                //Recipent recipent = new Recipent(userId, $"{user!.LastName}{user!.FirstName.Remove(1)}", user.AdminColor!);
-                //ticket.RecipentId = recipent.Id;
-
                 await _context.TicketRecipents.AddAsync(new TicketRecipent(ticketId, userId));
                 await _context.SaveChangesAsync();
 
@@ -278,8 +245,24 @@ namespace ReportingApplication.Services
             }
             catch (Exception e)
             {
-                throw new Exception($"Error from isRead in TicketService, message: {e}");
+                throw new Exception($"Error from takeTicket in TicketService, message: {e}");
             }
         }
+
+        public async Task<bool> closeOrOpenTicket(Guid ticketId)
+        {
+            try
+            {
+                await _context.Tickets
+                    .Where(t => t.Id == ticketId)
+                    .ExecuteUpdateAsync(x => x.SetProperty(t => t.isFinished, t => t.isFinished ? false : true));
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Error from finishTicket in TicketService, message: {e}");
+            }
+        }   
     }
 }

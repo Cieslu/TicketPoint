@@ -15,24 +15,29 @@
     }@else {
     <ol class="list-group">
         @for(ticket of tickets; track ticket.id){
-        <li class="list-group-item item-action shadow" [ngClass]="{'fw-bold bg-body-tertiary': !ticket.isRead}">
+        <li class="list-group-item item-action shadow f-size" [ngClass]="{'fw-bold bg-body-tertiary': !ticket.isRead}">
             <div class="row">
                 <div class="col-10 border-end border-black">
                     <a class="text-decoration-none d-flex text-black p-2" routerLink="/administrator/ticket/{{ticket.id}}">
                         <div class="d-flex col-3">
+                            @if(ticket.isFinished){
+                                <i class="bi bi-x-circle-fill text-danger me-1"></i>
+                            }
                             <span class="text-truncate">
                                 <i class="bi bi-person"></i> {{ticket.user!.firstName}} {{ticket.user!.lastName}} ({{ticket.user!.signature}})
                             </span>
                         </div>
-                        <div class="me-auto d-flex offset-1 col-6">
+                        <div class="me-auto d-flex col-7">
                             <span class="text-truncate">
                                 <i class="bi bi-file-text"></i> {{ticket.title}}
                             </span>
+                            <div class="col d-flex justify-content-end">
+                                @for (recipent of ticket.recipents; track recipent.userId) {
+                                    <span class="badge rounded-pill me-1" [ngStyle]="{'background-color': recipent?.recipentColor}">{{recipent?.recipentName}}</span>
+                                }
+                            </div>
                         </div>
                         <div class="col-2 d-flex justify-content-end ">
-                            @for (recipent of ticket.recipents; track recipent.userId) {
-                                <span class="badge rounded-pill me-1" [ngStyle]="{'background-color': recipent?.recipentColor}">{{recipent?.recipentName}}</span>
-                            }
                             <i class="bi bi-calendar"> {{ticket.created | date:"dd/MM/YYYY"}}</i> 
                         </div>
                     </a>
@@ -52,11 +57,7 @@
                     </div>
                     <div class="col-3 d-flex justify-content-center">
                         <button type="button" class="btn btn-outline-warning" (click)="takeTicket(ticket.id)">
-                            @if(!isRecipent){
-                            <i class="bi bi-bookmark-check-fill"></i>
-                            }@else{
-                            <i class="bi bi-bookmark-dash-fill"></i>
-                            }
+                            <i class="bi bi-bookmark-check-fill"></i> 
                         </button>
                     </div>
                     <div class="col-4 d-flex justify-content-center">
@@ -64,8 +65,13 @@
                             <i class="bi bi-pen-fill"></i>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><button class="dropdown-item text-primary-emphasis"><i class="bi bi-arrow-clockwise"></i> Przywróć</button></li>
-                            <li><button class="dropdown-item text-danger"><i class="bi bi-x-circle"></i> Zakończ</button></li>
+                            <li>
+                                @if(ticket.isFinished){
+                                    <button class="dropdown-item text-primary-emphasis" (click)="closeOrOpenTicket(ticket.id)"><i class="bi bi-arrow-clockwise"></i> Przywróć</button>
+                                }@else{
+                                    <button class="dropdown-item text-danger" (click)="closeOrOpenTicket(ticket.id)"><i class="bi bi-x-circle"></i> Zamknij</button>
+                                }
+                            </li>
                         </ul>
                     </div>
                     <!-- <button type="button" class="btn btn-outline-success" (click)="isRead(ticket.id)">

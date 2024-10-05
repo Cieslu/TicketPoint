@@ -58,8 +58,11 @@ export class TicketManagementService {
   }
 
   takeTicket(ticketId: string, userId: string): Observable<HttpStatusCode>{
-    console.log(userId);
     return this.httpClient.put<HttpStatusCode>(`${this.api}/takeTicket/${ticketId}/${userId}`, null);
+  }
+
+  closeOrOpenTicket(ticketId: string): Observable<HttpStatusCode>{
+    return this.httpClient.put<HttpStatusCode>(`${this.api}/closeOrOpenTicket/${ticketId}`, null);
   }
 
 
@@ -73,7 +76,7 @@ export class TicketManagementService {
       ticket.title, 
       ticket.description, 
       ticket.isRead, 
-      ticket.status, 
+      ticket.isFinished, 
       ticket.files, 
       (ticket.user ? this.userManagementService.toUserDTO(ticket.user!) : undefined), 
       ticket.attachments?.map(x => this.toAttachmentDTO(x)),
@@ -89,7 +92,7 @@ export class TicketManagementService {
       ticketDTO.title, 
       ticketDTO.description, 
       ticketDTO.isRead, 
-      ticketDTO.status, 
+      ticketDTO.isFinished, 
       this.userManagementService.toUser(ticketDTO.user!), 
       ticketDTO.attachments?.map(x => this.toAttachment(x)),
       ticketDTO.files, 

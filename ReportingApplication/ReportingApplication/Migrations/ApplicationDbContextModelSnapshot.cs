@@ -102,19 +102,20 @@ namespace ReportingApplication.Migrations
                     b.Property<bool>("IsRead")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("isFinished")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Tickets");
                 });
@@ -223,23 +224,34 @@ namespace ReportingApplication.Migrations
                     b.Navigation("ticket");
                 });
 
+            modelBuilder.Entity("ReportingApplication.Models.Ticket", b =>
+                {
+                    b.HasOne("ReportingApplication.Models.User", "User")
+                        .WithMany("Tickets")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ReportingApplication.Models.TicketRecipent", b =>
                 {
                     b.HasOne("ReportingApplication.Models.Ticket", "Ticket")
                         .WithMany("TicketRecipents")
                         .HasForeignKey("TicketId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("ReportingApplication.Models.User", "User")
+                    b.HasOne("ReportingApplication.Models.User", "Recipent")
                         .WithMany("TicketRecipents")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("Ticket");
+                    b.Navigation("Recipent");
 
-                    b.Navigation("User");
+                    b.Navigation("Ticket");
                 });
 
             modelBuilder.Entity("ReportingApplication.Models.Ticket", b =>
@@ -252,6 +264,8 @@ namespace ReportingApplication.Migrations
             modelBuilder.Entity("ReportingApplication.Models.User", b =>
                 {
                     b.Navigation("TicketRecipents");
+
+                    b.Navigation("Tickets");
                 });
 #pragma warning restore 612, 618
         }

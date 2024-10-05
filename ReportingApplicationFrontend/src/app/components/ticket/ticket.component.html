@@ -4,7 +4,17 @@
 <div class="row">
     <div class="col-6 border border-2 rounded p-4 shadow">
         <div>
-            <h2 class="text-center">Informacje o użytkowniku</h2>
+            @if(ticket.isFinished){
+                <div class="text-center">
+                    <i class="bi bi-x-circle-fill text-danger fs-1"> Zamknięte</i>
+                </div>
+            }
+            <div class="col d-flex">
+                @for (recipent of ticket.recipents; track recipent.userId) {
+                    <span class="badge rounded-pill me-1" [ngStyle]="{'background-color': recipent?.recipentColor}">{{recipent?.recipentName}}</span>
+                }
+            </div>
+            <h2 class="text-center mt-3">Informacje o użytkowniku</h2>
             <div class="border-bottom">
                 <p><span class="fw-bold">Imię:</span> {{ticket.user!.firstName}}</p>
                 <p><span class="fw-bold">Nazwisko:</span> {{ticket.user!.lastName}}</p>
