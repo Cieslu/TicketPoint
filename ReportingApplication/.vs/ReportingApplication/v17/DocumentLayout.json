@@ -103,8 +103,7 @@
               "RelativeToolTip": "ReportingApplication\\Interfaces\\Services\\ITicketManagementService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-05T19:27:53.293Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-05T19:27:53.293Z"
             },
             {
               "$type": "Document",
@@ -116,8 +115,7 @@
               "RelativeToolTip": "ReportingApplication\\Interfaces\\Controllers\\ITicketManagementController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-05T18:04:32.243Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-05T18:04:32.243Z"
             },
             {
               "$type": "Document",
@@ -129,8 +127,7 @@
               "RelativeToolTip": "ReportingApplication\\Controllers\\TicketManagementController.cs",
               "ViewState": "AQIAAFwAAAAAAAAAAAAuwGwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-02T20:58:46.861Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-02T20:58:46.861Z"
             },
             {
               "$type": "Document",
@@ -154,8 +151,7 @@
               "RelativeToolTip": "ReportingApplication\\Models\\Ticket.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-02T08:40:19.568Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-02T08:40:19.568Z"
             },
             {
               "$type": "Document",
@@ -167,8 +163,7 @@
               "RelativeToolTip": "ReportingApplication\\ModelsDTO\\Ticket\\TicketDTO.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-01T21:47:56.661Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-01T21:47:56.661Z"
             },
             {
               "$type": "Document",
@@ -192,8 +187,7 @@
               "RelativeToolTip": "ReportingApplication\\Models\\TicketRecipent.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-01T15:20:56.152Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-01T15:20:56.152Z"
             },
             {
               "$type": "Document",
@@ -229,8 +223,7 @@
               "RelativeToolTip": "ReportingApplication\\Models\\Recipent.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAACAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-24T17:55:23.08Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-24T17:55:23.08Z"
             },
             {
               "$type": "Document",
@@ -266,8 +259,7 @@
               "RelativeToolTip": "ReportingApplication\\Services\\TicketManagementService.cs",
               "ViewState": "AQIAANEAAAAAAAAAAAAswPMAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-24T17:55:32.141Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-24T17:55:32.141Z"
             }
           ]
         }

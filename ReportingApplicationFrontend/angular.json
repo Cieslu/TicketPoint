@@ -21,7 +21,8 @@
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
-              "zone.js"
+              "zone.js",
+              "@angular/localize/init"
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
@@ -65,7 +66,7 @@
           "configurations": {
             "production": {
               "buildTarget": "ReportingApplicationFrontend:build:production"
-            },
+            }, 
             "development": {
               "buildTarget": "ReportingApplicationFrontend:build:development"
             }
@@ -83,8 +84,7 @@
           "options": {
             "polyfills": [
               "zone.js",
-              "zone.js/testing"
-            ],
+              "zone.js/testing"            ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               "src/favicon.ico",
