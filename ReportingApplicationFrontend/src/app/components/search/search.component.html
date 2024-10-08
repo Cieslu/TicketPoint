@@ -1,5 +1,8 @@
 <div class="row">
-    <div class="col-6">
+    <div class="col-12">
+        <input class="form-control me-2" type="search" [placeholder]="placeholder" aria-label="Search" [(ngModel)]="searchText" (input)="search()">
+    </div>
+    <div class="col-12 mt-1">
         <select class="form-select" aria-label="Branch select" [(ngModel)]="searchText2" (change)="searchB()">
             <option [disabled]="true">{{initialValue}}</option>
             @if(searchText2 !== initialValue){
@@ -10,7 +13,21 @@
             }
         </select>
     </div>
-    <div class="col-6">
-        <input class="form-control me-2" type="search" [placeholder]="placeholder" aria-label="Search" [(ngModel)]="searchText" (input)="search()">
+    <div class="col-12 mt-1">
+        <select class="form-select" aria-label="Branch select" [(ngModel)]="searchText3" (change)="searchB()">
+            <option [disabled]="true">{{initialValue2}}</option>
+            @if(searchText3 !== initialValue2){
+                <option class="text-danger">Brak</option>
+            }
+            <!-- @for(branch of branches; track $index){
+                <option>{{branch}}</option>
+            } -->
+        </select>
     </div>
+    @if(accessibleCheckBoxClosedTickets){
+        <div class="col-12 mt-1">
+            <input type="checkbox" class="btn-check" id="btnCheckshowClosedTickets" autocomplete="off"  name="showClosedTickets" [(ngModel)]="showClosedTickets" (change)="checkBoxTicketClosed()">
+            <label class="btn btn-outline-primary col-12" for="btnCheckshowClosedTickets">Pokaż zamknięte</label>
+        </div>
+    }
 </div>

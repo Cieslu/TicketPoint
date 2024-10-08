@@ -100,9 +100,14 @@ namespace ReportingApplication.Services
                 {
                     user.AdminColor = editUserDTO.AdminColor;
 
-                   /* await _context.Recipents
-                        .Where(x => x.UserId == user.Id)
-                        .ExecuteUpdateAsync(y => y.SetProperty(x => x.RecipentColor, user.AdminColor));*/
+                    /* await _context.Recipents
+                         .Where(x => x.UserId == user.Id)
+                         .ExecuteUpdateAsync(y => y.SetProperty(x => x.RecipentColor, user.AdminColor));*/
+                }
+                else
+                {
+                    user.AdminColor = null;
+
                 }
 
                 IdentityResult resultCreate = await _userManager.UpdateAsync(user);

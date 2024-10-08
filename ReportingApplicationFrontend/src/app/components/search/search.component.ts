@@ -11,15 +11,21 @@ import { FormsModule } from '@angular/forms';
 export class SearchComponent implements OnChanges{
   @Output() searchUser = new EventEmitter();
   @Output() searchBranch = new EventEmitter();
+  @Output() checkBoxClosedTickets = new EventEmitter();
   @Input() branches!: Set<string>; 
   @Input() updatedBranches!: boolean;
   @Input() placeholder!: string;
+  @Input() accessibleCheckBoxClosedTickets!: boolean;
 
   //@Input() resetSearchB: boolean = false; 
   
   searchText: string = "";
   searchText2: string = "Filtruj po sygnaturze oddziału...";
   initialValue: string = "Filtruj po sygnaturze oddziału..."; 
+
+  searchText3: string = "Obsługiwane przeze mnie...";
+  initialValue2: string = "Obsługiwane przeze mnie...";
+  showClosedTickets: boolean = false;
   
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['updatedBranches']){
@@ -38,7 +44,7 @@ export class SearchComponent implements OnChanges{
     this.searchUser.emit(this.searchText);
   }
 
-  searchB(){
+  searchB(): void{
     if(this.searchText !== ""){//Jeśli podczas filtracji po sygnaturze oddziału jest coś w polu wyszukiwania użytkownika, to ustawiany jest na pusty string 
       this.searchText = "";
     }
@@ -48,5 +54,9 @@ export class SearchComponent implements OnChanges{
     }else{
       this.searchBranch.emit(this.searchText2);
     }
+  }
+
+  checkBoxTicketClosed(): void{
+    this.checkBoxClosedTickets.emit(this.showClosedTickets)
   }
 }

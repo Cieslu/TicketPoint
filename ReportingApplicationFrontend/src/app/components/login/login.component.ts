@@ -14,21 +14,26 @@ import { NgClass } from '@angular/common';
 import { RoleService } from '../../services/role/role.service';
 import { map, Subscription, take } from 'rxjs';
 import { DecodeTokenService } from '../../services/decode_token/decode-token.service';
+import { SuccessComponent } from '../success/success.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, SpinnerComponent, ErrorComponent, NgClass],
+  imports: [FormsModule, SpinnerComponent, ErrorComponent, NgClass, SuccessComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent implements OnDestroy {
+export class LoginComponent implements OnDestroy, OnInit {
   private subscriptionSpinner: Subscription = new Subscription();
   private subscriptionLogin: Subscription = new Subscription();
+  private subscriptionSuccess: Subscription = new Subscription();
+  private subscriptionError: Subscription = new Subscription();
   loginRequest: LoginRequest = new LoginRequest("","");
   isLoading$: boolean = false;
   error: number = 0;
   role$: boolean = false;
+  error_is_visible: boolean = false;
+  success_is_visible: boolean = false;
 
   constructor(
     private loginService: LoginService, 
@@ -39,12 +44,23 @@ export class LoginComponent implements OnDestroy {
     private isLoggedService: IsLoggedService,
     private roleService: RoleService,
     private decodeTokenService: DecodeTokenService
-
   ){}
+
+  ngOnInit(): void {
+    this.subscriptionSuccess = this.errorService.getVisible().subscribe({
+      next: (x: boolean) => { this.error_is_visible = x }
+    });
+
+    this.subscriptionError = this.successService.getVisible().subscribe({
+      next: (x: boolean) => { this.success_is_visible = x}
+    });
+  }
 
   ngOnDestroy(): void {
     this.subscriptionSpinner.unsubscribe();
     this.subscriptionLogin.unsubscribe();
+    this.subscriptionSuccess.unsubscribe();
+    this.subscriptionError.unsubscribe();
   }
   
   login(loginForm: NgForm) {

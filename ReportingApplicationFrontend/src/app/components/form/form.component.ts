@@ -49,6 +49,9 @@ export class FormComponent implements OnChanges{
         }
       });
     } else if (this.operation === 1) {
+      if(this.formUser.isAdministrator && this.formUser.adminColor === null){
+        this.formUser.adminColor = "#000000";
+      }
       this.formEvent.emit(this.formUser);
     }
   }

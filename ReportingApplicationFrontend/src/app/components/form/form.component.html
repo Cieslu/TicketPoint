@@ -93,10 +93,10 @@
             </div>
             }
         </div>
-        <div class="form-check mb-2">
-            <input class="form-check-input" type="checkbox" id="checkboxIsAdministrator" name="isAdministrator"
+        <div class="form-check p-0 mb-2">
+            <input class="btn-check m-0" type="checkbox" id="checkboxIsAdministrator" autocomplete="off" name="isAdministrator"
                 [(ngModel)]="formUser.isAdministrator" #isAdministrator="ngModel">
-            <label class="form-check-label" for="checkboxIsAdministrator">Czy konto Administratora?</label>
+            <label class="btn btn-outline-dark m-0" for="checkboxIsAdministrator">Administrator</label>
         </div>
         @if(formUser.isAdministrator){
             <div class="form-check">

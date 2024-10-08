@@ -1,61 +1,70 @@
-<div class="mb-3 row">   
-    <div class="col-6">
-        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal" (click)="chooseOpeartion(4, null)">
-            <i class="bi bi-person-plus-fill"></i>
-        </button>
-    </div>
-    <div class="col-6">
-        <app-search (searchUser)="searchUser($event)" (searchBranch)="searchBranch($event)" [branches]="branches" [updatedBranches]="updatedBranches" [placeholder]="placeholder"></app-search>
-    </div>
-</div>
-@if(isLoading){
-    <app-spinner></app-spinner> 
-}@else{
-    <div>
-        @if(users.length === 0 && !isLoading){
-            <div class="d-flex justify-content-center">
-                <div class="alert alert-warning col-6" role="alert">
-                    <i class="bi bi-exclamation-triangle-fill"></i>
-                    Lista użytkowników jest pusta!
+<div class="row">
+    <div class="col-10 mt-3">
+        @if(success_is_visible){
+        <app-success></app-success>
+        }
+        @if(error_is_visible){
+        <app-error></app-error>
+        }
+        @if(isLoading){
+        <app-spinner></app-spinner>
+        }@else{
+        <ul class="list-group">
+            @for(user of users; track user.id){
+            <li class="list-group-item item-action d-flex shadow">
+                <div class="me-auto p-2">
+                    <span class="fw-bold me-1">
+                        <i class="bi bi-person"></i>{{user.firstName}} {{user.lastName}} ({{user.userName}}),
+                        <i class="bi bi-envelope"></i> {{user.email}}
+                    </span>
+                    @if(user.isAdministrator){
+                    <span class="badge rounded-pill me-1"
+                        [ngStyle]="{'background-color': user.adminColor}">Administrator</span>
+                    }
+                    <span class="badge bg-primary rounded-pill me-1">{{user.branch}}</span>
+                    <span class="badge bg-info rounded-pill">{{user.signature}}</span>
+                    @if(user.locked){
+                    <i class="bi bi-lock-fill text-warning ms-2"></i>
+                    }
                 </div>
-            </div>
-        }@else {
-            <ol class="list-group">
-                @for(user of users; track user.id){
-                    <li class="list-group-item item-action d-flex shadow">
-                        <div class="me-auto p-2">
-                            <span class="fw-bold me-1">
-                                <i class="bi bi-person"></i>{{user.firstName}} {{user.lastName}} ({{user.userName}}),
-                                <i class="bi bi-envelope"></i> {{user.email}}
-                            </span>
-                            @if(user.isAdministrator){
-                                <span class="badge rounded-pill me-1" [ngStyle]="{'background-color': user.adminColor}">Administrator</span>
-                            }
-                            <span class="badge bg-primary rounded-pill me-1">{{user.branch}}</span>
-                            <span class="badge bg-info rounded-pill">{{user.signature}}</span>
-                            @if(user.locked){
-                                <i class="bi bi-lock-fill text-warning ms-2"></i>
-                            }
-                        </div>
-                        <div class="buttons-action">
-                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal" (click)="chooseOpeartion(1, user)">
-                                <i class="bi bi-pencil-fill"></i>
-                            </button>
-                            <button type="button" class="btn btn-outline-info ms-1" data-bs-toggle="modal" data-bs-target="#modal" (click)="chooseOpeartion(6, user)">
-                                <i class="bi bi-shield-lock-fill"></i>
-                            </button>
-                            <button type="button" class="btn btn-outline-warning mx-1" data-bs-toggle="modal" data-bs-target="#modal" (click)="chooseOpeartion(2, user)">
-                                <i class="bi bi-ban"></i>
-                            </button>
-                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modal" (click)="chooseOpeartion(3, user)">
-                                <i class="bi bi-trash3-fill"></i>
-                            </button>
-                            
-                        </div>
-                    </li>
-                }
-            </ol>
+                <div class="buttons-action">
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal"
+                        (click)="chooseOperation(1, user)">
+                        <i class="bi bi-pencil-fill"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-info ms-1" data-bs-toggle="modal"
+                        data-bs-target="#modal" (click)="chooseOperation(6, user)">
+                        <i class="bi bi-shield-lock-fill"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-warning mx-1" data-bs-toggle="modal"
+                        data-bs-target="#modal" (click)="chooseOperation(2, user)">
+                        <i class="bi bi-ban"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modal"
+                        (click)="chooseOperation(3, user)">
+                        <i class="bi bi-trash3-fill"></i>
+                    </button>
+
+                </div>
+            </li>
+            }@empty {
+            <li>
+                <div class="d-flex justify-content-center">
+                    <div class="alert alert-warning col-6 shadow" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        Lista użytkowników jest pusta!
+                    </div>
+                </div>
+            </li>
+            }
+        </ul>
         }
     </div>
-}
-<app-modal [operation]="action" [user]="user" (newUser)="addNewUserFromModal($event)" (removeUser)="deleteUser($event)" (updateUser)="editUser($event)" (lockUser)="lockOrUnlockUser($event)"></app-modal>
+    <div class="col-2 p-0">
+        <app-aside-panel (searchUser)="searchUser($event)" (searchBranch)="searchBranch($event)"
+            (operation)="chooseOperationAddUser($event)" [branches]="branches" [updatedBranches]="updatedBranches"
+            [placeholder]="placeholder" [accessibleAddUserBtn]="accessibleAddUserBtn"></app-aside-panel>
+    </div>
+</div>
+<app-modal [operation]="action" [user]="user" (newUser)="addNewUserFromModal($event)" (removeUser)="deleteUser($event)"
+    (updateUser)="editUser($event)" (lockUser)="lockOrUnlockUser($event)"></app-modal>

@@ -100,17 +100,34 @@ namespace ReportingApplication.Services
             }
         }
 
-        public async Task<List<TicketDTO>> showTickets()
+        public async Task<List<TicketDTO>> showTickets(bool isClosed)
         {
             try
             {
-                List<Ticket> tickets = await _context.Tickets
-                    .Include(t => t.User)
-                    .Include(t => t.TicketRecipents)
-                        .ThenInclude(tr => tr.Recipent)
-                    .AsNoTracking()
-                    .AsSplitQuery()
-                    .ToListAsync();
+                List<Ticket> tickets = new();
+
+                if (isClosed == false)
+                {
+                    tickets = await _context.Tickets
+                        .Where(t => t.isFinished == false)
+                        .Include(t => t.User)
+                        .Include(t => t.TicketRecipents)
+                            .ThenInclude(tr => tr.Recipent)
+                        .AsNoTracking()
+                        .AsSplitQuery()
+                        .ToListAsync();
+                }
+                else
+                {
+                    tickets = await _context.Tickets
+                      .Where(t => t.isFinished == true)
+                      .Include(t => t.User)
+                      .Include(t => t.TicketRecipents)
+                          .ThenInclude(tr => tr.Recipent)
+                      .AsNoTracking()
+                      .AsSplitQuery()
+                      .ToListAsync();
+                }
 
                 List<TicketDTO> ticketsDTO = _mapper.Map<List<TicketDTO>>(tickets);
 

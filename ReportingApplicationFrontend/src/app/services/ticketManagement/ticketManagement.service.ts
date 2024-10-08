@@ -37,8 +37,8 @@ export class TicketManagementService {
     return this.httpClient.post<TicketDTO>(`${this.api}/addTicket`, formData);
   }
 
-  showTickets(): Observable<TicketDTO[]>{
-    return this.httpClient.get<TicketDTO[]>(`${this.api}/showTickets`);
+  showTickets(isClosed: boolean): Observable<TicketDTO[]>{
+    return this.httpClient.get<TicketDTO[]>(`${this.api}/showTickets/${isClosed}`);
   }
 
   showTicket(ticketId: string): Observable<TicketDTO>{

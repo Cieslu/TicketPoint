@@ -1,53 +1,61 @@
-<div class="row justify-content-center">
-    <div class="col-7">
-        <img src="../../../assets/ticketPointPhoto.png"  alt="ticketPointPhoto">
-    </div>
-    <!-- <app-spinner></app-spinner> -->
-    <div class="col-5 login-mt">
-        <h2 class="text-center text-color mb-4">Zaloguj się do aplikacji TicketPoint</h2>
-        @if(isLoading$){
-            <app-spinner></app-spinner>
-        }
-        <form class="col-12" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control"
-                    [ngClass]="{'is-valid': !userName.errors?.['required'] && !userName.errors?.['pattern'] && !userName.errors?.['minlength'], 'is-invalid': userName.errors?.['required'] && userName.touched || userName.errors?.['pattern'] || userName.errors?.['minlength']}"
-                    id="floatingUserName" placeholder="name@example.com" name="userName"
-                    [(ngModel)]="loginRequest.userName" #userName="ngModel" required pattern="^[A-Za-z/d]{2,}$"
-                    minlength="2" maxlength="3">
-                <label for="floatingUserName">Nazwa użytkownika</label>
-                @if(userName.errors?.['required'] && userName.touched){
-                <div class="invalid-feedback">
-                    Nazwa użytkownika jest wymagana!
+<div class="container mt-5">
+    @if(success_is_visible){
+        <app-success></app-success>
+    }
+    @if(error_is_visible){
+        <app-error></app-error>
+    }
+    <div class="row justify-content-center">
+        <div class="col-7">
+            <img src="../../../assets/ticketPointPhoto.png"  alt="ticketPointPhoto">
+        </div>
+        <!-- <app-spinner></app-spinner> -->
+        <div class="col-5 login-mt">
+            <h2 class="text-center text-color mb-4">Zaloguj się do aplikacji TicketPoint</h2>
+            @if(isLoading$){
+                <app-spinner></app-spinner>
+            }
+            <form class="col-12" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control"
+                        [ngClass]="{'is-valid': !userName.errors?.['required'] && !userName.errors?.['pattern'] && !userName.errors?.['minlength'], 'is-invalid': userName.errors?.['required'] && userName.touched || userName.errors?.['pattern'] || userName.errors?.['minlength']}"
+                        id="floatingUserName" placeholder="name@example.com" name="userName"
+                        [(ngModel)]="loginRequest.userName" #userName="ngModel" required pattern="^[A-Za-z/d]{2,}$"
+                        minlength="2" maxlength="3">
+                    <label for="floatingUserName">Nazwa użytkownika</label>
+                    @if(userName.errors?.['required'] && userName.touched){
+                    <div class="invalid-feedback">
+                        Nazwa użytkownika jest wymagana!
+                    </div>
+                    }@else if(userName.errors?.['minlength'] || userName.errors?.['pattern']){
+                    <div class="invalid-feedback">
+                        Nazwa użytkownika musi mieć minimum 2 znaki!
+                    </div>
+                    }
                 </div>
-                }@else if(userName.errors?.['minlength'] || userName.errors?.['pattern']){
-                <div class="invalid-feedback">
-                    Nazwa użytkownika musi mieć minimum 2 znaki!
+                <div class="form-floating">
+                    <input type="password" class="form-control"
+                        [ngClass]="{'is-valid': !password.errors?.['required'] && !password.errors?.['pattern'] && !password.errors?.['minlength'], 'is-invalid': password.errors?.['required'] && password.touched || password.errors?.['pattern'] || password.errors?.['minlength']}"
+                        id="floatingPassword" placeholder="Password" name="password" [(ngModel)]="loginRequest.password"
+                        #password="ngModel" required minlength="8" maxlength="8"
+                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8}$">
+                    <label for="floatingPassword">Hasło</label>
+                    @if(password.errors?.['required'] && password.touched){
+                    <div class="invalid-feedback">
+                        Hasło jest wymagane!
+                    </div>
+                    }@else if(password.errors?.['minlength'] || password.errors?.['pattern']){
+                    <div class="invalid-feedback">
+                        Hasło musi mieć 8 znaków!
+                    </div>
+                    }
                 </div>
-                }
-            </div>
-            <div class="form-floating">
-                <input type="password" class="form-control"
-                    [ngClass]="{'is-valid': !password.errors?.['required'] && !password.errors?.['pattern'] && !password.errors?.['minlength'], 'is-invalid': password.errors?.['required'] && password.touched || password.errors?.['pattern'] || password.errors?.['minlength']}"
-                    id="floatingPassword" placeholder="Password" name="password" [(ngModel)]="loginRequest.password"
-                    #password="ngModel" required minlength="8" maxlength="8"
-                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8}$">
-                <label for="floatingPassword">Hasło</label>
-                @if(password.errors?.['required'] && password.touched){
-                <div class="invalid-feedback">
-                    Hasło jest wymagane!
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-primary" [disabled]="userName.invalid || password.invalid" (click)="loading()">
+                        Zaloguj się
+                    </button>               
                 </div>
-                }@else if(password.errors?.['minlength'] || password.errors?.['pattern']){
-                <div class="invalid-feedback">
-                    Hasło musi mieć 8 znaków!
-                </div>
-                }
-            </div>
-            <div class="text-center mt-3">
-                <button type="submit" class="btn btn-primary" [disabled]="userName.invalid || password.invalid" (click)="loading()">
-                    Zaloguj się
-                </button>               
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>

@@ -6,7 +6,7 @@ namespace ReportingApplication.Interfaces.Controllers
     public interface ITicketManagementController
     {
         public Task<ActionResult> addTicket(NewTicketDTO newTicketDTO);
-        public Task<ActionResult<List<TicketDTO>>> showTickets();
+        public Task<ActionResult<List<TicketDTO>>> showTickets(bool isClosed);
         public Task<ActionResult<TicketDTO>> showTicket(Guid ticketId);
         public Task<ActionResult<bool>> doesUserHaveAnyTickets(string userId);
         public Task<ActionResult> downloadAttachment(Guid ticketId, int attachmentId);

@@ -36,11 +36,11 @@ namespace ReportingApplication.Controllers
             return Ok(result);
         }
 
-        [HttpGet("showTickets")]
+        [HttpGet("showTickets/{isClosed}")]
         [Authorize(Roles = "Administrator")]
-        public async Task<ActionResult<List<TicketDTO>>> showTickets()
+        public async Task<ActionResult<List<TicketDTO>>> showTickets(bool isClosed)
         {
-            IEnumerable<TicketDTO> ticketsDTO = await _ticketService.showTickets();
+            IEnumerable<TicketDTO> ticketsDTO = await _ticketService.showTickets(isClosed);
 
             return Ok(ticketsDTO);
         }

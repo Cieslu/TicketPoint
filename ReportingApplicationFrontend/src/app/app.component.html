@@ -1,4 +1,4 @@
-<header class="header-f-size">
+<header class="header-f-size border">
   <nav class="navbar navbar-expand-lg bg-body-tertiary header-f-size">
     <div class="container-fluid">
       @if(role){
@@ -38,7 +38,9 @@
             }@else{
               <span class="fw-bold me-2">Witaj {{userName}} </span>
             }
-            <button class="btn btn-secondary header-f-size" (click)="logout()">Wyloguj się</button>
+            <button class="btn header-f-size fw-bold" (click)="logout()">
+              <i class="bi bi-box-arrow-right"></i> Wyloguj się
+            </button>
           </div>
         </div>
       }
@@ -46,14 +48,14 @@
   </nav>
 </header>
 
-<main class="container my-5 body-f-size">
-  @if(error_is_visible){
+<main class="container-fluid my-0 body-f-size">
+  <!-- @if(error_is_visible){
     <app-error></app-error>
   }
 
   @if(success_is_visible){
     <app-success></app-success>
-  }
+  } -->
 
   <router-outlet></router-outlet>
 </main>

@@ -11,7 +11,6 @@ import { SuccessService } from '../../services/success/success.service';
 export class SuccessComponent implements OnInit {
   success: number = 0;
   name: string = "Nie zdefiniowano";
-  isVisible = false;
 
   constructor(
     private successService: SuccessService

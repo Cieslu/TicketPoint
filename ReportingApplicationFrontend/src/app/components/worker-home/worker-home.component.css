@@ -1,8 +1,18 @@
-.window{
+.btn-create-ticket{
     transition: transform 0.3s ease;
 }
 
-.window:hover{
-    transform: scale(1.1);
-    cursor: pointer;
+.btn-caption{
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
+
+.btn-create-ticket:hover{
+    transform: scale(1.1);
+}
+
+.btn-create-ticket:hover .btn-caption{
+    opacity: 1;
+    /* transform: scale(1.1); */
+}
+

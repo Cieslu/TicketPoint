@@ -1,0 +1,8 @@
+<div class="bg-body-tertiary border border-top-0 p-2 h m-0">
+    @if(accessibleAddUserBtn){
+        <button type="button" class="btn btn-primary mb-1 col-12" data-bs-toggle="modal" data-bs-target="#modal" (click)="chooseOperation(4, null)">
+            <i class="bi bi-person-plus-fill"></i>
+        </button>
+    }
+    <app-search (searchUser)="passSearchUser($event)" (searchBranch)="passSearchBranch($event)" (checkBoxClosedTickets)="showClosedTickets($event)" [branches]="branches" [updatedBranches]="updatedBranches"[placeholder]="placeholder" [accessibleCheckBoxClosedTickets]="accessibleCheckBoxClosedTickets"></app-search>
+</div>

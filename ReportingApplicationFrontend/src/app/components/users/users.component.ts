@@ -9,11 +9,14 @@ import { SuccessComponent } from '../success/success.component';
 import { ErrorComponent } from '../error/error.component';
 import { SearchComponent } from '../search/search.component';
 import { NgStyle } from '@angular/common';
+import { AsidePanelComponent } from '../aside-panel/aside-panel.component';
+import { SuccessService } from '../../services/success/success.service';
+import { ErrorService } from '../../services/error/error.service';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [SpinnerComponent, ModalComponent, SuccessComponent, ErrorComponent, SearchComponent, NgStyle],
+  imports: [SpinnerComponent, ModalComponent, SuccessComponent, ErrorComponent, SearchComponent, NgStyle, AsidePanelComponent],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })
@@ -25,11 +28,16 @@ export class UsersComponent {
   action: number = 0;
   user: User | null = new User("", "", "", "", "", "", "", "", false, false);
   updatedBranches: boolean = false;
-  placeholder: string = "Wyszukaj użytkownika"
+  placeholder: string = "Wyszukaj użytkownika";
+  error_is_visible: boolean = false;
+  success_is_visible: boolean = false;
+  accessibleAddUserBtn: boolean = true;
 
   constructor(
     private userManagementService: UserManagementService,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private errorService: ErrorService,
+    private successService: SuccessService
   ) { }
 
   ngOnInit(): void {
@@ -48,11 +56,24 @@ export class UsersComponent {
         this.spinnerService.setLoading(false);
       }
     });
+
+    this.errorService.getVisible().subscribe({
+      next: (x: boolean) => { this.error_is_visible = x }
+    });
+
+    this.successService.getVisible().subscribe({
+      next: (x: boolean) => { this.success_is_visible = x }
+    });
   }
 
-  chooseOpeartion(o: number, u: User | null): void {
+  chooseOperation(o: number, u: User | null): void {
     this.action = o;
     this.user = Object.assign({}, u);//assign służy do kopiowania obiektu, który jest wykorzystywany podczas edycji (nie kopiuje obiektów zagnieżdżonych) oraz nie wymusza zgodności typów
+  }
+
+  chooseOperationAddUser(obj: {o: number, u: User | null}): void {
+    this.action = obj.o;
+    this.user = Object.assign({}, obj.u);//assign służy do kopiowania obiektu, który jest wykorzystywany podczas edycji (nie kopiuje obiektów zagnieżdżonych) oraz nie wymusza zgodności typów
   }
 
   addNewUserFromModal(u: User): void {

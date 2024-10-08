@@ -7,7 +7,7 @@ namespace ReportingApplication.Interfaces.Services
     public interface ITicketManagementService
     {
         public Task<TicketDTO?> addTicket(NewTicketDTO newTicektDTO);
-        public Task<List<TicketDTO>> showTickets();
+        public Task<List<TicketDTO>> showTickets(bool isClosed);
         public Task<TicketDTO?> showTicket(Guid ticketId);
         public Task<bool> doesUserHaveAnyTickets(string userId);
         public Task<(byte[], string)?> downloadAttachment(Guid ticketId, int attachmentId);
