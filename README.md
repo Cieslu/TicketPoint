@@ -16,10 +16,10 @@ A system for creating tickets 🎫. This application is called TicketPoint, beca
         1. ##### [Home Page](#home-page-1)
         2. ##### [Ticket Details](#tikcet-details)
         3. ##### [Users List](#users-list-1)
-        4. ##### [Adding User](#adding-user)
-        5. ##### [Change User's Password](#change-users-password)
-        6. ##### [Blocking User](#blocking-user)
-        7. ##### [Deleting User](#deleting-user)
+        4. ##### [Adding User](#adding-user-1)
+        5. ##### [Change User's Password](#change-users-password-1)
+        6. ##### [Blocking User](#blocking-user-1)
+        7. ##### [Deleting User](#deleting-user-1)
    
 # Technologies Used
 #### Backend:
