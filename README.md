@@ -43,7 +43,7 @@ A system for creating tickets 🎫. This application is called TicketPoint, beca
 ## All Roles
 
 ### Login Page
-> To use the application, log-in is required.
+> To use the application, login is required.
 <img src="/TicketPoint_Photos/login.png" alt="login">
 
 ## Administrator Role
@@ -96,20 +96,12 @@ A system for creating tickets 🎫. This application is called TicketPoint, beca
 <img src="/TicketPoint_Photos/password_change.png" alt="password_change">
 
 ### Blocking User
-> The administrator has the option to block a user.
+> The administrator has the option to block a user. This operation will prevent login by a user.
 <img src="/TicketPoint_Photos/blocking_user.png" alt="blocking_user">
 
 ### Deleting User
 > The administrator has the option to delete a user who does not have created any tickets.
 <img src="/TicketPoint_Photos/deleting_user_without_tickets.png" alt="deleting_user_without_tickets">
-
-
-
-
-
-
-
-
 
 <div align="center">
   
