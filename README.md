@@ -54,13 +54,15 @@ A system for creating tickets 🎫. This application is called TicketPoint, beca
 > The image below shows tickets filtered by branches.
 <img src="/TicketPoint_Photos/filtering_by_branches.png" alt="filtering_by_branches">
 
-
 > This is the list of closed tickets. The tikcets can be reopened.
 <img src="/TicketPoint_Photos/closed_tickets.png" alt="closed_tickets">
 
 > This image shows the tickets for the logged-in administrator.
 <img src="/TicketPoint_Photos/my_tickets.png" alt="my_tickets">
 
+### Tikcet Details
+> This page shows the ticket details. There will also be a chat between the administrator and the user.
+<img src="/TicketPoint_Photos/ticket_details_with_attachments.png" alt="ticket_details_with_attachments">
 
 
 
