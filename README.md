@@ -64,6 +64,10 @@ A system for creating tickets 🎫. This application is called TicketPoint, beca
 > This page shows the ticket details. There will also be a chat between the administrator and the user.
 <img src="/TicketPoint_Photos/ticket_details_with_attachments.png" alt="ticket_details_with_attachments">
 
+### Users List
+> This page shows all the users who are registered in the application.
+<img src="/TicketPoint_Photos/users_list.png" alt="users_list">
+
 
 
 
