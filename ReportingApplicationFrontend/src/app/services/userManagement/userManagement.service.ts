@@ -10,8 +10,7 @@ import { ChangePassword } from '../../models/changePassword';
   providedIn: 'root'
 })
 export class UserManagementService {
-  //api: string = "http://localhost:5284/api/Administrator"; //Korner
-  api: string = "https://localhost:44385/api/administrator/UserManagement"; //Dom
+  api: string = "https://localhost:44385/api/administrator/UserManagement";
 
 
   constructor(

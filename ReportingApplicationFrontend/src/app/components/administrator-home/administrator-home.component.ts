@@ -10,7 +10,7 @@ import { TicketDTO } from '../../modelsDTO/ticketDTO';
 import { Ticket } from '../../models/ticket';
 import { RouterLink } from '@angular/router';
 import { TicketComponent } from '../ticket/ticket.component';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { CommonModule, NgClass } from '@angular/common';
 import { LogoutService } from '../../services/logout/logout.service';
 import { IsLoggedService } from '../../services/is_logged/is-logged.service';
@@ -49,8 +49,10 @@ export class AdministratorHomeComponent implements OnInit, OnDestroy {
   userId!: string;
   error_is_visible: boolean = false;
   success_is_visible: boolean = false;
-  accessibleCheckBoxClosedTickets: boolean = true;
+  accessibleCheckBox: boolean = true;
   checkBoxClosedTickets: boolean = false;
+  checkBoxOnlyMine: boolean = false;
+  wasDownloaded: boolean = false;
 
   constructor(
     private ticketManagementService: TicketManagementService,
@@ -65,7 +67,6 @@ export class AdministratorHomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscriptionSpinner = this.spinnerService.loading().subscribe(x => this.isLoading = x);
     this.userId = this.decodeTokenService.getIdFromToken()!;
-
 
     this.subscriptionShowTicket = this.ticketManagementService.showTickets(false).subscribe({
       next: (res: TicketDTO[]) => {
@@ -89,6 +90,9 @@ export class AdministratorHomeComponent implements OnInit, OnDestroy {
         this.subscriptionSpinner.unsubscribe();
       }
     });
+    
+
+    
 
     // this.errorService.getVisible().subscribe({
     //   next: (x: boolean) => { this.error_is_visible = x }
@@ -153,7 +157,6 @@ export class AdministratorHomeComponent implements OnInit, OnDestroy {
   }
 
   closeOrOpenTicket(ticketId: string) {
-    console.log(this.checkBoxClosedTickets)
     this.ticketManagementService.closeOrOpenTicket(ticketId).subscribe({
       next: () => {
         const ticket = this.tickets.find(x => x.id === ticketId);
@@ -161,18 +164,21 @@ export class AdministratorHomeComponent implements OnInit, OnDestroy {
 
         const ticketIndex = this.tickets.findIndex(x => x.id === ticketId);
         const searchedTicketIndex = this.searchedTickets.findIndex(x => x.id === ticketId);
+        
         if (ticket !== undefined && searchedTicket !== undefined) {
           if(this.checkBoxClosedTickets){
             ticket.isFinished ? this.tickets.splice(ticketIndex, 1) : null;
             searchedTicket.isFinished ? this.searchedTickets.splice(searchedTicketIndex, 1) : null;
             this.openTickets.push(ticket);
-            this.searchedOpenTickets.push(ticket);
+            this.searchedOpenTickets.push(searchedTicket);
           }else{
-            ticket.isFinished ? null : this.openTickets.splice(ticketIndex, 1);
-            searchedTicket.isFinished ? null : this.searchedOpenTickets.splice(searchedTicketIndex, 1);
+            ticket.isFinished ? null : this.tickets.splice(ticketIndex, 1);
+            searchedTicket.isFinished ? null : this.searchedTickets.splice(searchedTicketIndex, 1);
+            this.closedTickets.push(ticket);
+            this.searchedClosedTickets.push(searchedTicket);
           }
           ticket.isFinished = ticket.isFinished ? false : true;
-          searchedTicket.isFinished = searchedTicket.isFinished ? false : true;
+          searchedTicket.isFinished = searchedTicket.isFinished ? false : true;        
         }
       },
       error: () => {
@@ -184,37 +190,63 @@ export class AdministratorHomeComponent implements OnInit, OnDestroy {
   showClosedTickets(result: boolean): void {
     this.checkBoxClosedTickets = result;
     if (result) {
-      this.closedTickets = [];
-      this.searchedClosedTickets = [];
-      this.subscriptionShowTicket = this.ticketManagementService.showTickets(result).subscribe({
-        next: (res: TicketDTO[]) => {
-          this.spinnerService.setLoading(false);
-          this.subscriptionSpinner.unsubscribe();
-          res.forEach(u => {
-            const date: string[] = u.created.split(" ");//Formatowanie daty na rozpoznawalną przez potok "date"
-            const formattedDate: string = date[0].split('.').reverse().join('-') + 'T' + date[1];//Formatowanie daty na rozpoznawalną przez potok "date"
-            u.created = formattedDate;
-            this.closedTickets.push(this.ticketManagementService.toTicket(u))
-            this.closedTickets.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
-          });
-          this.searchedClosedTickets = JSON.parse(JSON.stringify(this.closedTickets));
-          this.closedTickets.forEach(x => { this.branches.add(x.user!.signature) });//W tym przypadku sa robione kopie wartości
-
-          this.tickets = this.closedTickets;
-          this.searchedTickets = this.searchedClosedTickets
-        },
-        error: err => {
-          this.spinnerService.setLoading(false);
-          this.subscriptionSpinner.unsubscribe();
-          this.logoutService.logoutErr401();
+      if(!this.wasDownloaded){
+        this.closedTickets = [];
+        this.searchedClosedTickets = [];
+        this.subscriptionShowTicket = this.ticketManagementService.showTickets(result).subscribe({
+          next: (res: TicketDTO[]) => {
+            this.wasDownloaded = true;
+            this.spinnerService.setLoading(false);
+            this.subscriptionSpinner.unsubscribe();
+            res.forEach(u => {
+              const date: string[] = u.created.split(" ");//Formatowanie daty na rozpoznawalną przez potok "date"
+              const formattedDate: string = date[0].split('.').reverse().join('-') + 'T' + date[1];//Formatowanie daty na rozpoznawalną przez potok "date"
+              u.created = formattedDate;
+              this.closedTickets.push(this.ticketManagementService.toTicket(u))
+              this.closedTickets.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
+            });
+            this.searchedClosedTickets = JSON.parse(JSON.stringify(this.closedTickets));
+            this.closedTickets.forEach(x => { this.branches.add(x.user!.signature) });//W tym przypadku sa robione kopie wartości
+  
+            this.tickets = this.closedTickets;
+            this.searchedTickets = this.searchedClosedTickets
+          },
+          error: err => {
+            this.spinnerService.setLoading(false);
+            this.subscriptionSpinner.unsubscribe();
+            this.logoutService.logoutErr401();
+          }
+        });
+      }else{
+        this.tickets = this.closedTickets;
+        this.searchedTickets = this.searchedClosedTickets;
+        if(this.checkBoxOnlyMine){
+          this.onlyMine(true);
         }
-      });
+      }
     } else {
-      // this.openTickets.push(this.closedTickets.find(ct => ct.isFinished === false)!)
-      // this.searchedClosedTickets.push(this.closedTickets.find(ct => ct.isFinished === false)!)
       this.tickets = this.openTickets;
-      this.searchedTickets = this.searchedOpenTickets
-      console.log(this.tickets.find(ct => ct.isFinished === false)!);
+      this.searchedTickets = this.searchedOpenTickets;
+    }
+  }
+
+  onlyMine(result: boolean): void{
+    this.checkBoxOnlyMine = result;
+    if(result && this.checkBoxClosedTickets){
+      this.tickets = this.closedTickets.filter(t => t.recipents?.some(r => r.userId === this.userId));
+      this.searchedTickets = this.searchedClosedTickets.filter(t => t.recipents?.some(r => r.userId === this.userId));
+    }
+    else if(result && !this.checkBoxClosedTickets){
+      this.tickets = this.openTickets.filter(t => t.recipents?.some(r => r.userId === this.userId));
+      this.searchedTickets = this.searchedOpenTickets.filter(t => t.recipents?.some(r => r.userId === this.userId));
+    }
+    else if(!result && this.checkBoxClosedTickets){
+      this.tickets = this.closedTickets;
+      this.searchedTickets = this.searchedClosedTickets;
+    }
+    else if(!result && !this.checkBoxClosedTickets){
+      this.tickets = this.openTickets;
+      this.searchedTickets = this.searchedOpenTickets;
     }
   }
 }

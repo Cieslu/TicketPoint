@@ -37,7 +37,7 @@
                     }
                 }@else if(operation === 3){
                     Operacja ta sprawi, że użytkownik zostanie całkowicie usunięty z bazy użytkowników.
-                    @if(!canDeleteUser){
+                    @if(canDeleteUser){
                         <p class="text-danger"><i class="bi bi-exclamation-triangle-fill"></i> Nie można usunąć użytkownika, który ma zgłoszenia!</p>
                     }
                 }@else if(operation === 4){
@@ -52,7 +52,7 @@
                 @if(operation === 2){
                     <button type="button" class="btn btn-primary" (click)="lockOrUnlockUser(user!)">Zatwierdź</button>
                 }@else if(operation === 3){
-                    <button type="button" class="btn btn-primary" (click)="deleteUser(user!)" [disabled]="!canDeleteUser">Zatwierdź</button>
+                    <button type="button" class="btn btn-primary" (click)="deleteUser(user!)" [disabled]="canDeleteUser">Zatwierdź</button>
                 }
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
             </div>

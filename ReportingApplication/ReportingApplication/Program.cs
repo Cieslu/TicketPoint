@@ -101,12 +101,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors(options =>
 {
-    options.WithOrigins("http://localhost:4200")
+    options.WithOrigins("http://localhost:4200", "http://[::1]:4200")
+/*
         .AllowAnyHeader()
-        .AllowAnyMethod()
-        .WithExposedHeaders("Content-Disposition");
-/*        .WithMethods("GET", "POST", "PUT", "DELETE")
-        .WithHeaders("content-type", "authorization");*/
+        .AllowAnyMethod()*/
+        .WithExposedHeaders("Content-Disposition")
+        .WithMethods("GET", "POST", "PUT", "DELETE")
+        .WithHeaders("content-type", "authorization");
 });
 
 app.UseHttpsRedirection();

@@ -16,11 +16,12 @@ export class AsidePanelComponent {
   @Input() updatedBranches!: boolean;
   @Input() placeholder!: string;
   @Input() accessibleAddUserBtn!: boolean;
-  @Input() accessibleCheckBoxClosedTickets!: boolean;
+  @Input() accessibleCheckBox!: boolean;
   @Output() searchUser = new EventEmitter();
   @Output() searchBranch = new EventEmitter();
   @Output() operation = new EventEmitter<{ o: number, u: User | null }>();
   @Output() checkBoxClosedTickets = new EventEmitter();
+  @Output() checkBoxOnlyMine = new EventEmitter();
 
   passSearchUser(result: string): void {
     this.searchUser.emit(result);
@@ -34,7 +35,11 @@ export class AsidePanelComponent {
     this.operation.emit({ o, u })
   }
 
-  showClosedTickets(result: boolean): void {
+  closedTickets(result: boolean): void {
     this.checkBoxClosedTickets.emit(result);
+  }
+
+  onlyMine(result: boolean): void{
+    this.checkBoxOnlyMine.emit(result);
   }
 }

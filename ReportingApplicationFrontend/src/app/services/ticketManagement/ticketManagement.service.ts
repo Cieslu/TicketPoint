@@ -1,6 +1,6 @@
 import { HttpClient, HttpResponse, HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { TicketDTO } from '../../modelsDTO/ticketDTO';
 import { Ticket } from '../../models/ticket';
 import { UserManagementService } from '../userManagement/userManagement.service';
@@ -13,7 +13,7 @@ import { Recipent } from '../../models/recipent';
   providedIn: 'root'
 })
 export class TicketManagementService {
-  api: string = "https://localhost:44385/api/TicketManagement"; //Dom
+  api: string = "https://localhost:44385/api/TicketManagement";
 
   constructor(
     private httpClient: HttpClient,
@@ -36,6 +36,8 @@ export class TicketManagementService {
     //formData.append("filesPaths", "");
     return this.httpClient.post<TicketDTO>(`${this.api}/addTicket`, formData);
   }
+
+
 
   showTickets(isClosed: boolean): Observable<TicketDTO[]>{
     return this.httpClient.get<TicketDTO[]>(`${this.api}/showTickets/${isClosed}`);

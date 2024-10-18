@@ -186,7 +186,7 @@ namespace ReportingApplication.Services
             {
                 int quantity = await _context.Tickets.Where(x => x.UserId == userId).CountAsync();
 
-                return quantity > 0 ? false : true;
+                return quantity > 0 ? true : false;
 
             }
             catch (Exception e)

@@ -61,10 +61,7 @@
         }
     </div>
     <div class="col-2 p-0">
-        <app-aside-panel (searchUser)="searchUser($event)" (searchBranch)="searchBranch($event)"
-            (operation)="chooseOperationAddUser($event)" [branches]="branches" [updatedBranches]="updatedBranches"
-            [placeholder]="placeholder" [accessibleAddUserBtn]="accessibleAddUserBtn"></app-aside-panel>
+        <app-aside-panel (searchUser)="searchUser($event)" (searchBranch)="searchBranch($event)" (operation)="chooseOperationAddUser($event)" [branches]="branches" [updatedBranches]="updatedBranches" [placeholder]="placeholder" [accessibleAddUserBtn]="accessibleAddUserBtn"></app-aside-panel>
     </div>
 </div>
-<app-modal [operation]="action" [user]="user" (newUser)="addNewUserFromModal($event)" (removeUser)="deleteUser($event)"
-    (updateUser)="editUser($event)" (lockUser)="lockOrUnlockUser($event)"></app-modal>
+<app-modal [operation]="action" [user]="user" (newUser)="addNewUserFromModal($event)" (removeUser)="deleteUser($event)" (updateUser)="editUser($event)" (lockUser)="lockOrUnlockUser($event)"></app-modal>
