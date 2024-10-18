@@ -7,15 +7,19 @@
 A system for creating tickets 🎫. This application is called TicketPoint, because it serves as the point for resolving user issues. It is a very simple and easy-to-use system that is always accessible to users, who need help with their daily tasks. 📟🎫
 
 ## Table Of Contents
-1. ##### [Technologies Used](#technologies-used)
-2. ##### [Database](#database)
-3. ##### [Application Overview](#application-overview)
-    1. ##### [All Roles](#all-roles)
-        1. ##### [Login Page](#login-page)
-    2. ##### [Administrator Role](#administrator-role)
-        1. ##### [Home Page](#home-page)
+1. ##### [Technologies Used](#technologies-used-1)
+2. ##### [Database](#database-1)
+3. ##### [Application Overview](#application-overview-1)
+    1. ##### [All Roles](#all-roles-1)
+        1. ##### [Login Page](#login-page-1)
+    2. ##### [Administrator Role](#administrator-role-1)
+        1. ##### [Home Page](#home-page-1)
         2. ##### [Ticket Details](#tikcet-details)
-        3. ##### [Users List](#users-list)
+        3. ##### [Users List](#users-list-1)
+        4. ##### [Adding User](#adding-user)
+        5. ##### [Change User's Password](#change-users-password)
+        6. ##### [Blocking User](#blocking-user)
+        7. ##### [Deleting User](#deleting-user)
    
 # Technologies Used
 #### Backend:
@@ -95,7 +99,7 @@ A system for creating tickets 🎫. This application is called TicketPoint, beca
 > The administrator has the option to block a user.
 <img src="/TicketPoint_Photos/blocking_user.png" alt="blocking_user">
 
-### Blocking User
+### Deleting User
 > The administrator has the option to delete a user who does not have created any tickets.
 <img src="/TicketPoint_Photos/deleting_user_without_tickets.png" alt="deleting_user_without_tickets">
 
