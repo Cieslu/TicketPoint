@@ -6,6 +6,17 @@
 
 A system for creating tickets 🎫. This application is called TicketPoint, because it serves as the point for resolving user issues. It is a very simple and easy-to-use system that is always accessible to users, who need help with their daily tasks. 📟🎫
 
+## Table Of Contents
+1. ##### [Technologies Used](#technologies-used)
+2. ##### [Database](#database)
+3. ##### [Application Overview](#application-overview)
+    1. ##### [All Roles](#all-roles)
+        1. ##### [Login Page](#login-page)
+    2. ##### [Administrator Role](#administrator-role)
+        1. ##### [Home Page](#home-page)
+        2. ##### [Ticket Details](#tikcet-details)
+        3. ##### [Users List](#users-list)
+   
 # Technologies Used
 #### Backend:
 - .NET 8.0,
@@ -65,11 +76,28 @@ A system for creating tickets 🎫. This application is called TicketPoint, beca
 <img src="/TicketPoint_Photos/ticket_details_with_attachments.png" alt="ticket_details_with_attachments">
 
 ### Users List
-> This page shows all the users who are registered in the application.
+> This page shows all the users who are registered in the application. The administrator can edit, block, or delete users and change their passwords using special buttons. The filtering panel is also accessible.
 <img src="/TicketPoint_Photos/users_list.png" alt="users_list">
 
+### Adding User
+> The administrator has the option to add a user. When the 'Administrator' checkbox is checked, the user being created will have the administrator role.
+<img src="/TicketPoint_Photos/adding_user.png" alt="adding_user">
 
+### Editing User
+> The administrator has the option to edit a user’s details
+<img src="/TicketPoint_Photos/editing_user.png" alt="editing_user">
 
+### Change User's Password
+> The administrator has the option to change a user's password.
+<img src="/TicketPoint_Photos/password_change.png" alt="password_change">
+
+### Blocking User
+> The administrator has the option to block a user.
+<img src="/TicketPoint_Photos/blocking_user.png" alt="blocking_user">
+
+### Blocking User
+> The administrator has the option to delete a user who does not have created any tickets.
+<img src="/TicketPoint_Photos/deleting_user_without_tickets.png" alt="deleting_user_without_tickets">
 
 
 
